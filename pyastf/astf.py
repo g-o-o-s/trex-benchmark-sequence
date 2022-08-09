@@ -47,9 +47,13 @@ def astf_test(server, mult, duration, profile_path, outputPath):
       readableTime = datetime.datetime.fromtimestamp(timestamp / 1000)
       readableTime = readableTime.strftime('%H:%M:%S')
       tx_bps = sizeof_fmt(stats['global']['tx_bps'])
-      tx_pps = sizeof_fmt(stats['global']['tx_pps'], False)
+      rx_bps = sizeof_fmt(stats['global']['rx_bps'])
+      tx_pps = round(stats['global']['tx_pps'] / 1000, 2)
+      rx_pps = round(stats['global']['rx_pps'] / 1000, 2)
 
-      toPrint = "[%s] (total) tx_bps: %s; (total) tx_pps: %s\n" % (readableTime, tx_bps, tx_pps)
+      rx_drop_bps = sizeof_fmt(stats['global']['rx_drop_bps'])
+
+      toPrint = "[%s] bps: [%s / %s] pps: [%dK / %dK] drop: [ %s ]\n" % (readableTime, tx_bps, rx_bps, tx_pps, rx_pps, rx_drop_bps)
 
       sys.stderr.write(toPrint)
 
