@@ -8,25 +8,36 @@ import { default as clog } from 'ee-log';
 import { default as Hjson } from 'hjson';
 import { default as child_process } from 'child_process';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
+import { default as prettyms } from 'pretty-ms';
 
-console.log(`--- Logs begin at ${new Date().toUTCString()} ---`)
+console.log(`--- Logs begin at ${new Date().toUTCString()} ---`);
 
 // path relative to repo root
-const astfpyPath = 'pyastf/astf.py'
+const astfpyPath = 'pyastf/astf.py';
 
 // node main.mjs foo.hjson
 const testProfile = process.argv[2];
 
-const config = Hjson.parse(readFileSync(`profiles/${testProfile}`).toString());
+const config = Hjson.parse(readFileSync(`profiles/${testProfile}.hjson`).toString());
 
 for (let i = 0; i < config.testProfiles.length; i++) {
+  // # 10
+  const startTime = new Date();
   // whoami
   const prof = config.testProfiles[i];
-  clog.info('Spawning profile', prof.name);
-  clog.debug('Profile config', prof);
+  
+  console.log(`--- Starting run ${prof.name} at ${startTime.toUTCString()} ---`);
+  
 
   // setup array for json output file
   const outputJson = [];
+
+  // object of arrays for final human readable stats
+  const finalSummaryStats = {
+    tx_bps: [],
+    rx_bps: [],
+    rx_drop_bps: [],
+  };
 
   // note the use of spawnSync here - this could be improved with like, locking and a worker pool and stuff
   const child = child_process.spawnSync(
@@ -92,6 +103,11 @@ for (let i = 0; i < config.testProfiles.length; i++) {
       const rx_bps = input.stats.global.rx_bps / 1000000;
       const rx_drop_bps = input.stats.global.rx_drop_bps / 1000000;
 
+      // push data for our summary stats at the end
+      finalSummaryStats.tx_bps.push(tx_bps);
+      finalSummaryStats.rx_bps.push(rx_bps);
+      finalSummaryStats.rx_drop_bps.push(rx_drop_bps);
+
       // and here we push data for the graph
       data.datasets[0].data.push({
         x: timestamp,
@@ -109,7 +125,7 @@ for (let i = 0; i < config.testProfiles.length; i++) {
   }
 
   // setup graph title and config
-  const graphTitle = `m:${prof.mult} d:${prof.duration} f:${prof.file}`;
+  const graphTitle = `dut:${config.dutName} run:${config.runName} name:${prof.name} mult:${prof.mult} dur:${prof.duration} prof:${prof.file}`;
   const graphConfig = {
     type: 'line',
     data: data,
@@ -120,7 +136,7 @@ for (let i = 0; i < config.testProfiles.length; i++) {
           text: graphTitle,
           font: {
             family: "monospace",
-            size: 36,
+            size: 34,
           }
         },
         legend: {
@@ -190,8 +206,8 @@ for (let i = 0; i < config.testProfiles.length; i++) {
   };
 
   // do the graph
-  const canvas = Canvas.createCanvas(2400,800)
-  const canvasContext = canvas.getContext('2d')
+  const canvas = Canvas.createCanvas(2400,800);
+  const canvasContext = canvas.getContext('2d');
   const graph = new Chartjs.Chart(
     canvasContext,
     graphConfig
@@ -214,8 +230,114 @@ for (let i = 0; i < config.testProfiles.length; i++) {
   // and finally output our files
   writeFileSync(`${filePath}/${fileName}.png`, graphB64Image, {encoding: 'base64'});
   writeFileSync(`${filePath}/${fileName}.json`, JSON.stringify(outputJson));
+    
+  console.log(`Wrote output to ${filePath}/`);
+
+  // Print some final stats
+  finalSummaryStats.tx_bps = filterOutliers(finalSummaryStats.tx_bps);
+  finalSummaryStats.rx_bps = filterOutliers(finalSummaryStats.rx_bps);
+  finalSummaryStats.rx_drop_bps = filterOutliers(finalSummaryStats.rx_drop_bps)
+
+  const tx_bps_stddev = arr_stddev(finalSummaryStats.tx_bps);
+  const rx_bps_stddev = arr_stddev(finalSummaryStats.rx_bps);
+  const rx_drop_bps_stddev = arr_stddev(finalSummaryStats.rx_drop_bps);
+
+  const tx_bps_mean = arr_mean(finalSummaryStats.tx_bps);
+  const rx_bps_mean = arr_mean(finalSummaryStats.rx_bps);
+  const rx_drop_bps_mean = arr_mean(finalSummaryStats.rx_drop_bps);
+
+  console.log('');
+  console.log('averages:');
+  console.log(`tx_bps: ${tx_bps_mean}`);
+  console.log(`rx_bps: ${rx_bps_mean}`);
+  console.log(`rx_drop_bps: ${rx_drop_bps_mean}`);
+
+  console.log('');
+  console.log('stddevs:');
+  console.log(`tx_bps: ${tx_bps_stddev}`);
+  console.log(`rx_bps: ${rx_bps_stddev}`);
+  console.log(`rx_drop_bps: ${rx_drop_bps_stddev}`);
+
+  console.log('');
+
+  const finishTime = new Date();
+  const expectedFinishTime = new Date(startTime.getTime() + (1000 * prof.duration));
+
+  console.log(`Expected run time: ${prof.duration} s`);
+  console.log(`Run start time: ${startTime.toISOString()}`);
+  console.log(`Run end time: ${finishTime.toISOString()}`);
   
-  console.log(`Wrote output to ${filePath}/`)
+  var diff = (finishTime.getTime() - expectedFinishTime.getTime());
+  var sign = diff < 0 ? -1 : 1;
+  console.log(
+    sign === 1 ? "Over by " : "Under by ",
+    prettyms(diff)
+  );
+
+  console.log('');
+
+  console.log(`--- Finished run ${prof.name} at ${finishTime.toUTCString()} ---`);
 
   // GOTO 10
+}
+
+// stole these from various stackoverflow threads
+function arr_stddev(arr) {
+  // Creating the mean with Array.reduce
+  let mean = arr.reduce((acc, curr)=>{
+    return acc + curr;
+  }, 0) / arr.length;
+   
+  // Assigning (value - mean) ^ 2 to every array item
+  arr = arr.map((k)=>{
+    return (k - mean) ** 2;
+  })
+   
+  // Calculating the sum of updated array
+ let sum = arr.reduce((acc, curr)=> acc + curr, 0);
+  
+ // Calculating the variance
+ let variance = sum / arr.length;
+  
+ // Returning the Standered deviation
+ return Math.sqrt(sum / arr.length);
+}
+
+function arr_mean(arr) {
+  const total = arr.reduce((acc, c) => acc + c, 0);
+  const mean = total / arr.length;
+  return mean;
+}
+
+// Clear outliers from our datasets - only used in human readable display
+function filterOutliers(someArray) {  
+
+  // Copy the values, rather than operating on references to existing values
+  var values = someArray.concat();
+
+  // Then sort
+  values.sort( function(a, b) {
+          return a - b;
+       });
+
+  /* Then find a generous IQR. This is generous because if (values.length / 4) 
+   * is not an int, then really you should average the two elements on either 
+   * side to find q1.
+   */     
+  var q1 = values[Math.floor((values.length / 4))];
+  // Likewise for q3. 
+  var q3 = values[Math.ceil((values.length * (3 / 4)))];
+  var iqr = q3 - q1;
+
+  // Then find min and max values
+  var maxValue = q3 + iqr*1.5;
+  var minValue = q1 - iqr*1.5;
+
+  // Then filter anything beyond or beneath these values.
+  var filteredValues = values.filter(function(x) {
+      return (x <= maxValue) && (x >= minValue);
+  });
+
+  // Then return
+  return filteredValues;
 }
