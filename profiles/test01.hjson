@@ -3,7 +3,7 @@
   dutName: 'loopback',                                // for display only 
   runName: 'someRunIdentifier',                               // for display only
   sleep: 0.5,                                         // duration to sleep between perf samples
-  duration: 60,                                       // test duration - not a hard limit
+  duration: 10,                                       // test duration - not a hard limit
   testProfiles: [                                     // array of profiles to run
     {
       name: 'http_simple2',                           // for display only

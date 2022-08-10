@@ -1,31 +1,31 @@
 {
   server: 'trex.straylight.goosga.ng',
-  dutName: 'loopback',
-  runName: 'lo-tst-01',
+  dutName: 'r5s-openwrt-lan-bridge-wan-nat',
+  runName: '01',
   sleep: 0.5,
   duration: 120,
   testProfiles: [
     {
       name: 'http_simple2',
-      enabled: false,
-      mult: 1400,
+      enabled: true,
+      mult: 1600,
       file: 'trex-core/scripts/astf/http_simple2.py',
     },
     {
       name: 'http_advanced',
-      enabled: false,
-      mult: 1400,
+      enabled: true,
+      mult: 1600,
       file: 'trex-core/scripts/astf/http_advanced.py',
     },
     {
       name: 'udp_mix',
       enabled: true,
-      mult: 80000,
+      mult: 100000,
       file: 'trex-core/scripts/astf/udp_mix.py',
     },
     {
       name: 'emix2',
-      enabled: false,
+      enabled: true,
       mult: 2,
       file: 'trex-core/scripts/astf/emix2.py',
     }

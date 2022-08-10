@@ -10,7 +10,10 @@ import { default as child_process } from 'child_process';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { default as prettyms } from 'pretty-ms';
 
-console.log(`--- Logs begin at ${new Date().toUTCString()} ---`);
+
+const initTime = new Date();
+
+console.log(`--- Logs begin at ${initTime.toUTCString()} ---`);
 
 // path relative to repo root
 const astfpyPath = 'pyastf/astf.py';
@@ -19,6 +22,14 @@ const astfpyPath = 'pyastf/astf.py';
 const testProfile = process.argv[2];
 
 const config = Hjson.parse(readFileSync(`profiles/${testProfile}.hjson`).toString());
+
+const filePath = `./output/${config.dutName}/${config.runName}/${initTime.toJSON().replaceAll(':', '-').substring(0, 16)}/`
+// create the output dir if required
+if (!existsSync(filePath)){
+  mkdirSync(filePath, { recursive: true });
+}
+writeFileSync(`${filePath}/profile.json`, JSON.stringify(config, null, 2));
+
 
 for (let i = 0; i < config.testProfiles.length; i++) {
   // # 10
@@ -288,8 +299,8 @@ for (let i = 0; i < config.testProfiles.length; i++) {
     console.log('');
   
     // build our dirs
-    const filePath = `./output/${config.dutName}/${config.runName}/${startTime.toJSON().replaceAll(':', '-')}/${prof.name}/`
-    const fileName = `${prof.name}-mult_${prof.mult}-dur_${config.duration}-${startTime.toJSON().replaceAll(':', '-')}`
+    const filePath = `./output/${config.dutName}/${config.runName}/${initTime.toJSON().replaceAll(':', '-').substring(0, 16)}/${prof.name}/`
+    const fileName = `${config.dutName}-${config.runName}-${prof.name}-mult_${prof.mult}-dur_${config.duration}-${startTime.toJSON().replaceAll(':', '-')}`
   
     // create the output dir if required
     if (!existsSync(filePath)){
@@ -299,6 +310,10 @@ for (let i = 0; i < config.testProfiles.length; i++) {
     // and finally output our files
     writeFileSync(`${filePath}/${fileName}.png`, graphB64Image, {encoding: 'base64'});
     writeFileSync(`${filePath}/${fileName}.json`, JSON.stringify(outputJson, null, 2));
+
+    prof.sleep = config.sleep;
+    prof.duration = config.duration;
+    writeFileSync(`${filePath}/${fileName}-profile.json`, JSON.stringify(prof, null, 2));
   
     // tell user where we wrote our png/json
     console.log(`Wrote output to ${filePath}`);
@@ -308,6 +323,7 @@ for (let i = 0; i < config.testProfiles.length; i++) {
     console.log(`--- Finished run ${prof.name} at ${finishTime.toUTCString()} ---`);
   
   } else {
+    // profile is disabled
     console.log(`--- ${prof.name} disabled, skipping ---`);
   }
 
