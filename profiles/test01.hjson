@@ -7,6 +7,7 @@
   testProfiles: [                                     // array of profiles to run
     {
       name: 'http_simple2',                           // for display only
+      enabled: true,                                  // Is this profile enabled?
       mult: 1400,                                     // multiplier/amplification factor
       file: 'trex-core/scripts/astf/http_simple2.py', // astf file to run
     }
