@@ -14,7 +14,9 @@ console.log(`--- Logs begin at ${new Date().toUTCString()} ---`)
 // path relative to repo root
 const astfpyPath = 'pyastf/astf.py'
 
-const profiles = Hjson.parse(readFileSync('profiles/test01.hjson').toString());
+const testProfile = process.argv[2];
+
+const profiles = Hjson.parse(readFileSync(`profiles/${testProfile}`).toString());
 
 for (let i = 0; i < profiles.length; i++) {
   const prof = profiles[i];
