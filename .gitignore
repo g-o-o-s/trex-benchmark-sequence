@@ -1,0 +1,4 @@
+**/node_modules/**
+node_modules/**
+graphing_utils/test/node_modules/**
+sequencer/node_modules/**
