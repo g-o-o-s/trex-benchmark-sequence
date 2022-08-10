@@ -6,7 +6,7 @@ Yeah. Yeah.
 
 ## How use?
 
-Clone this repo, point it at your t-rex astf server.
+Clone this repo, submodule init, point it at your t-rex astf server.
 
 ## Help?
 
