@@ -1,32 +1,14 @@
 {
-  server: 'trex.straylight.goosga.ng',
-  dutName: 'loopback',
-  runName: 'test01',
-  sleep: 0.5,
-  testProfiles: [
+  server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
+  dutName: 'loopback',                                // for display only 
+  runName: 'someRunIdentifier',                               // for display only
+  sleep: 0.5,                                         // duration to sleep between perf samples
+  duration: 60,                                       // test duration - not a hard limit
+  testProfiles: [                                     // array of profiles to run
     {
-      name: 'http_simple2',
-      mult: 1400,
-      duration: 600,
-      file: 'trex-core/scripts/astf/http_simple2.py',
-    },
-    {
-      name: 'http_advanced',
-      mult: 1400,
-      duration: 600,
-      file: 'trex-core/scripts/astf/http_advanced.py',
-    },
-    {
-      name: 'udp_mix',
-      mult: 80000,
-      duration: 600,
-      file: 'trex-core/scripts/astf/udp_mix.py',
-    },
-    {
-      name: 'emix2',
-      mult: 400,
-      duration: 600,
-      file: 'trex-core/scripts/astf/emix2.py',
+      name: 'http_simple2',                           // for display only
+      mult: 1400,                                     // multiplier/amplification factor
+      file: 'trex-core/scripts/astf/http_simple2.py', // astf file to run
     }
   ]
 }

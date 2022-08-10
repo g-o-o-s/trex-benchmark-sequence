@@ -1,14 +1,29 @@
 {
   server: 'trex.straylight.goosga.ng',
   dutName: 'loopback',
-  runName: 'test01',
+  runName: 'lo-tst-01',
   sleep: 0.5,
+  duration: 60,
   testProfiles: [
     {
       name: 'http_simple2',
       mult: 1400,
-      duration: 10,
       file: 'trex-core/scripts/astf/http_simple2.py',
     },
+    {
+      name: 'http_advanced',
+      mult: 1400,
+      file: 'trex-core/scripts/astf/http_advanced.py',
+    },
+    {
+      name: 'udp_mix',
+      mult: 80000,
+      file: 'trex-core/scripts/astf/udp_mix.py',
+    },
+    {
+      name: 'emix2',
+      mult: 400,
+      file: 'trex-core/scripts/astf/emix2.py',
+    }
   ]
 }

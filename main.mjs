@@ -33,7 +33,7 @@ for (let i = 0; i < config.testProfiles.length; i++) {
   const outputJson = [];
 
   // object of arrays for final human readable stats
-  const finalSummaryStats = {
+  const summaryStats = {
     tx_bps: [],
     rx_bps: [],
     rx_drop_bps: [],
@@ -45,7 +45,7 @@ for (let i = 0; i < config.testProfiles.length; i++) {
     [
       '-r', `${config.server}`,
       '-m', `${prof.mult}`,
-      '-d', `${prof.duration}`,
+      '-d', `${config.duration}`,
       '-f', `${prof.file}`,
       '-s', `${config.sleep}`
     ],
@@ -104,9 +104,9 @@ for (let i = 0; i < config.testProfiles.length; i++) {
       const rx_drop_bps = input.stats.global.rx_drop_bps / 1000000;
 
       // push data for our summary stats at the end
-      finalSummaryStats.tx_bps.push(tx_bps);
-      finalSummaryStats.rx_bps.push(rx_bps);
-      finalSummaryStats.rx_drop_bps.push(rx_drop_bps);
+      summaryStats.tx_bps.push(tx_bps);
+      summaryStats.rx_bps.push(rx_bps);
+      summaryStats.rx_drop_bps.push(rx_drop_bps);
 
       // and here we push data for the graph
       data.datasets[0].data.push({
@@ -125,7 +125,7 @@ for (let i = 0; i < config.testProfiles.length; i++) {
   }
 
   // setup graph title and config
-  const graphTitle = `dut:${config.dutName} run:${config.runName} name:${prof.name} mult:${prof.mult} dur:${prof.duration} prof:${prof.file}`;
+  const graphTitle = `dut:${config.dutName} run:${config.runName} name:${prof.name} mult:${prof.mult} dur:${config.duration} prof:${prof.file}`;
   const graphConfig = {
     type: 'line',
     data: data,
@@ -136,7 +136,7 @@ for (let i = 0; i < config.testProfiles.length; i++) {
           text: graphTitle,
           font: {
             family: "monospace",
-            size: 34,
+            size: 30,
           }
         },
         legend: {
@@ -217,10 +217,76 @@ for (let i = 0; i < config.testProfiles.length; i++) {
   const graphB64Data = graph.toBase64Image();
   const graphB64Image = graphB64Data.replace(/^data:image\/\w+;base64,/, '');
 
+  // some basic analysis
+  summaryStats.tx_bps = filterOutliers(summaryStats.tx_bps);
+  summaryStats.rx_bps = filterOutliers(summaryStats.rx_bps);
+  summaryStats.rx_drop_bps = filterOutliers(summaryStats.rx_drop_bps)
+
+  summaryStats.tx_bps_stddev = arr_stddev(summaryStats.tx_bps);
+  summaryStats.rx_bps_stddev = arr_stddev(summaryStats.rx_bps);
+  summaryStats.rx_drop_bps_stddev = arr_stddev(summaryStats.rx_drop_bps);
+
+  summaryStats.tx_bps_mean = arr_mean(summaryStats.tx_bps);
+  summaryStats.rx_bps_mean = arr_mean(summaryStats.rx_bps);
+  summaryStats.rx_drop_bps_mean = arr_mean(summaryStats.rx_drop_bps);
+
+  summaryStats.tx_bps_max = Math.max(...summaryStats.tx_bps);
+  summaryStats.rx_bps_max = Math.max(...summaryStats.rx_bps);
+  summaryStats.rx_drop_bps_max = Math.max(...summaryStats.rx_drop_bps);
+
+  summaryStats.tx_bps_min = Math.min(...summaryStats.tx_bps);
+  summaryStats.rx_bps_min = Math.min(...summaryStats.rx_bps);
+  summaryStats.rx_drop_bps_min = Math.min(...summaryStats.rx_drop_bps);
+
+  // i love formatting text for output, don't you?
+  console.log('');
+  console.log('All datasets have had outliers trimmed for this summary display.');
+
+  console.log('');
+  console.log('averages:');
+  console.log(`tx_bps: ${summaryStats.tx_bps_mean}`);
+  console.log(`rx_bps: ${summaryStats.rx_bps_mean}`);
+  console.log(`rx_drop_bps: ${summaryStats.rx_drop_bps_mean}`);
+
+  console.log('');
+  console.log('stddevs:');
+  console.log(`tx_bps: ${summaryStats.tx_bps_stddev}`);
+  console.log(`rx_bps: ${summaryStats.rx_bps_stddev}`);
+  console.log(`rx_drop_bps: ${summaryStats.rx_drop_bps_stddev}`);
+
+  console.log('');
+  console.log('max:');
+  console.log(`tx_bps: ${summaryStats.tx_bps_max}`);
+  console.log(`rx_bps: ${summaryStats.rx_bps_max}`);
+  console.log(`rx_drop_bps: ${summaryStats.rx_drop_bps_max}`);
+
+  console.log('');
+  console.log('min:');
+  console.log(`tx_bps: ${summaryStats.tx_bps_min}`);
+  console.log(`rx_bps: ${summaryStats.rx_bps_min}`);
+  console.log(`rx_drop_bps: ${summaryStats.rx_drop_bps_min}`);
+
+  console.log('');
+
+  const finishTime = new Date();
+  const expectedFinishTime = new Date(startTime.getTime() + (1000 * config.duration));
+
+  console.log(`Expected run time: ${config.duration}s`);
+  console.log(`Run start time: ${startTime.toUTCString()}`);
+  console.log(`Run end time: ${finishTime.toUTCString()}`);
+  
+  var diff = (finishTime.getTime() - expectedFinishTime.getTime());
+  var sign = diff < 0 ? -1 : 1;
+  console.log(
+    sign === 1 ? "Over by" : "Under by",
+    prettyms(diff)
+  );
+
+  console.log('');
+
   // build our dirs
-  const timestamp = Date.now();
-  const filePath = `output/${config.dutName}/${config.runName}/${prof.name}`
-  const fileName = `${prof.name}-mult_${prof.mult}-dur_${prof.duration}-${timestamp}`
+  const filePath = `./output/${config.dutName}/${config.runName}/${prof.name}/${startTime.toJSON().replaceAll(':', '-')}/`
+  const fileName = `${prof.name}-mult_${prof.mult}-dur_${config.duration}-${startTime.toJSON().replaceAll(':', '-')}`
 
   // create the output dir if required
   if (!existsSync(filePath)){
@@ -229,50 +295,10 @@ for (let i = 0; i < config.testProfiles.length; i++) {
 
   // and finally output our files
   writeFileSync(`${filePath}/${fileName}.png`, graphB64Image, {encoding: 'base64'});
-  writeFileSync(`${filePath}/${fileName}.json`, JSON.stringify(outputJson));
-    
-  console.log(`Wrote output to ${filePath}/`);
+  writeFileSync(`${filePath}/${fileName}.json`, JSON.stringify(outputJson, null, 2));
 
-  // Print some final stats
-  finalSummaryStats.tx_bps = filterOutliers(finalSummaryStats.tx_bps);
-  finalSummaryStats.rx_bps = filterOutliers(finalSummaryStats.rx_bps);
-  finalSummaryStats.rx_drop_bps = filterOutliers(finalSummaryStats.rx_drop_bps)
-
-  const tx_bps_stddev = arr_stddev(finalSummaryStats.tx_bps);
-  const rx_bps_stddev = arr_stddev(finalSummaryStats.rx_bps);
-  const rx_drop_bps_stddev = arr_stddev(finalSummaryStats.rx_drop_bps);
-
-  const tx_bps_mean = arr_mean(finalSummaryStats.tx_bps);
-  const rx_bps_mean = arr_mean(finalSummaryStats.rx_bps);
-  const rx_drop_bps_mean = arr_mean(finalSummaryStats.rx_drop_bps);
-
-  console.log('');
-  console.log('averages:');
-  console.log(`tx_bps: ${tx_bps_mean}`);
-  console.log(`rx_bps: ${rx_bps_mean}`);
-  console.log(`rx_drop_bps: ${rx_drop_bps_mean}`);
-
-  console.log('');
-  console.log('stddevs:');
-  console.log(`tx_bps: ${tx_bps_stddev}`);
-  console.log(`rx_bps: ${rx_bps_stddev}`);
-  console.log(`rx_drop_bps: ${rx_drop_bps_stddev}`);
-
-  console.log('');
-
-  const finishTime = new Date();
-  const expectedFinishTime = new Date(startTime.getTime() + (1000 * prof.duration));
-
-  console.log(`Expected run time: ${prof.duration} s`);
-  console.log(`Run start time: ${startTime.toISOString()}`);
-  console.log(`Run end time: ${finishTime.toISOString()}`);
-  
-  var diff = (finishTime.getTime() - expectedFinishTime.getTime());
-  var sign = diff < 0 ? -1 : 1;
-  console.log(
-    sign === 1 ? "Over by " : "Under by ",
-    prettyms(diff)
-  );
+  // tell user where we wrote our png/json
+  console.log(`Wrote output to ${filePath}`);
 
   console.log('');
 
