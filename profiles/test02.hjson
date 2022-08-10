@@ -1,0 +1,14 @@
+{
+  server: 'trex.straylight.goosga.ng',
+  dutName: 'loopback',
+  runName: 'test01',
+  sleep: 0.5,
+  testProfiles: [
+    {
+      name: 'http_simple2',
+      mult: 1400,
+      duration: 10,
+      file: 'trex-core/scripts/astf/http_simple2.py',
+    },
+  ]
+}

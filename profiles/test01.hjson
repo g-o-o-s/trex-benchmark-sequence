@@ -1,34 +1,32 @@
-[
-  {
-    name: 'http_simple2',
-    server: 'trex.straylight.goosga.ng',
-    mult: 1400,
-    duration: 30,
-    file: 'astf/http_simple2.py',
-    sleep: '0.5',
-  },
-  {
-    name: 'http_advanced',
-    server: 'trex.straylight.goosga.ng',
-    mult: 500,
-    duration: 30,
-    file: 'astf/http_advanced.py',
-    sleep: '0.5',
-  },
-  {
-    name: 'udp_mix',
-    server: 'trex.straylight.goosga.ng',
-    mult: 40000,
-    duration: 30,
-    file: 'astf/udp_mix.py',
-    sleep: '0.5',
-  },
-  {
-    name: 'emix2',
-    server: 'trex.straylight.goosga.ng',
-    mult: 500,
-    duration: 30,
-    file: 'astf/emix2.py',
-    sleep: '0.5',
-  }
-]
+{
+  server: 'trex.straylight.goosga.ng',
+  dutName: 'loopback',
+  runName: 'test01',
+  sleep: 0.5,
+  testProfiles: [
+    {
+      name: 'http_simple2',
+      mult: 1400,
+      duration: 600,
+      file: 'trex-core/scripts/astf/http_simple2.py',
+    },
+    {
+      name: 'http_advanced',
+      mult: 1400,
+      duration: 600,
+      file: 'trex-core/scripts/astf/http_advanced.py',
+    },
+    {
+      name: 'udp_mix',
+      mult: 80000,
+      duration: 600,
+      file: 'trex-core/scripts/astf/udp_mix.py',
+    },
+    {
+      name: 'emix2',
+      mult: 400,
+      duration: 600,
+      file: 'trex-core/scripts/astf/emix2.py',
+    }
+  ]
+}
