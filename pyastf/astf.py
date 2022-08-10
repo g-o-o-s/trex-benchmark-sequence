@@ -9,6 +9,8 @@ import json
 import datetime
 import time
 
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+
 class JsonOutput:
   def __init__(self, timestamp, stats):
     self.timestamp = timestamp
@@ -48,7 +50,7 @@ def astf_test(server, mult, duration, profile_path, sleeptime):
       rx_pps = round(stats['global']['rx_pps'] / 1000, 2)
       rx_drop_bps = sizeof_fmt(stats['global']['rx_drop_bps'])
 
-      humanReadable = "[%s] bps: [%s / %s] pps: [%dK / %dK] drop: [ %s ]\n" % (readableTime, tx_bps, rx_bps, tx_pps, rx_pps, rx_drop_bps)
+      humanReadable = "[%s] bps: [%s / %s] pps: [%dK / %dK] drop: [%s]\n" % (readableTime, tx_bps, rx_bps, tx_pps, rx_pps, rx_drop_bps)
 
       sys.stderr.write(humanReadable)
       print(json.dumps(JsonOutput(timestamp, stats), default=vars))

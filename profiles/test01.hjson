@@ -1,0 +1,37 @@
+[
+  {
+    name: 'http_simple2',
+    server: 'trex.straylight.goosga.ng',
+    mult: 1400,
+    duration: 120,
+    file: 'astf/http_simple2.py',
+    sleep: '0.5',
+  },
+  // {
+  //   name: 'http_advanced',
+  //   server: 'trex.straylight.goosga.ng',
+  //   mult: 1,
+  //   duration: 10,
+  //   // trex v2.99 should be next to the repo
+  //   file: 'v2.99/astf/http_advanced.py',
+  //   sleep: '0.5',
+  // },
+  // {
+  //   name: 'udp_mix',
+  //   server: 'trex.straylight.goosga.ng',
+  //   mult: 40,
+  //   duration: 10,
+  //   // trex v2.99 should be next to the repo
+  //   file: 'v2.99/astf/udp_mix.py',
+  //   sleep: '0.5',
+  // },
+  // {
+  //   name: 'emix2',
+  //   server: 'trex.straylight.goosga.ng',
+  //   mult: 1,
+  //   duration: 10,
+  //   // trex v2.99 should be next to the repo
+  //   file: 'v2.99/astf/emix2.py',
+  //   sleep: '0.5',
+  // }
+]
