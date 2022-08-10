@@ -3,7 +3,7 @@
     name: 'http_simple2',
     server: 'trex.straylight.goosga.ng',
     mult: 1400,
-    duration: 120,
+    duration: 10,
     file: 'astf/http_simple2.py',
     sleep: '0.5',
   },

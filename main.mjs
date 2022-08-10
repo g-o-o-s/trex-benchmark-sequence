@@ -24,6 +24,8 @@ for (let i = 0; i < profiles.length; i++) {
   clog.info('Spawning profile', prof.name);
   clog.debug('Profile config', prof);
 
+  const outputJson = [];
+
   const child = child_process.spawnSync(
     astfpyPath,
     [
@@ -70,6 +72,8 @@ for (let i = 0; i < profiles.length; i++) {
     var input = stdout[j].toString();
     if (input != '') {
       input = JSON.parse(input);
+      outputJson.push(input);
+
       const timestamp = new Date(input.timestamp);
       const hours = timestamp.getHours();
       const minutes = "0" + timestamp.getMinutes();
@@ -107,18 +111,18 @@ for (let i = 0; i < profiles.length; i++) {
           text: graphTitle,
           font: {
             family: "monospace",
-            size: 16,
+            size: 24,
           }
         },
         legend: {
           position: 'top',
           align: 'left',
           labels: {
-            boxWidth: 14,
-            boxHeight: 14,
+            boxWidth: 18,
+            boxHeight: 18,
             font: {
               family: "monospace",
-              size: 12,
+              size: 20,
             }
           }
         }
@@ -130,11 +134,17 @@ for (let i = 0; i < profiles.length; i++) {
       },
       scales: {
         x: {
+          ticks: {
+            fontSize: 18
+          },
         },
         y: {
+          ticks: {
+            fontSize: 18
+          },
           position: 'right',
           type: 'linear',
-          suggestedMin: '20',
+          suggestedMin: '100',
           title: {
             text: 'Mbps',
             display: true
@@ -151,16 +161,16 @@ for (let i = 0; i < profiles.length; i++) {
       }
     },
   };
-    const canvas = Canvas.createCanvas(2400,800)
+  const canvas = Canvas.createCanvas(2400,800)
   const ctx = canvas.getContext('2d')
     const myChart = new Chartjs.Chart(
     ctx,
     config
   );
-    const b64Data = myChart.toBase64Image();
+
+  const b64Data = myChart.toBase64Image();
   const b64Image = b64Data.replace(/^data:image\/\w+;base64,/, '');
 
-  const timestamp = new Date();
-
-  writeFile(`graphs/${prof.name}-mult_${prof.mult}-dur_${prof.duration}-sleep_${prof.sleep}-${timestamp.toISOString().replace(':', '.')}.png`, b64Image, {encoding: 'base64'});
+  writeFile(`output/graph/${prof.name}-mult_${prof.mult}-dur_${prof.duration}-sleep_${prof.sleep}-${Date.now()}.png`, b64Image, {encoding: 'base64'});
+  writeFile(`output/json/${prof.name}-mult_${prof.mult}-dur_${prof.duration}-sleep_${prof.sleep}-${Date.now()}.json`, JSON.stringify(outputJson));
 }
