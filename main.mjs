@@ -6,11 +6,8 @@ import { default as Chartjs } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 import { default as clog } from 'ee-log';
 import { default as Hjson } from 'hjson';
-import { default as fs } from 'fs';
 import { default as child_process } from 'child_process';
-import { writeFile } from 'fs/promises';
-import { readFileSync } from 'fs';
-import { default as readline } from 'readline';
+import { readFileSync, writeFileSync } from 'fs';
 
 console.log(`--- Logs begin at ${new Date().toUTCString()} ---`)
 
@@ -85,15 +82,15 @@ for (let i = 0; i < profiles.length; i++) {
       const rx_drop_bps = input.stats.global.rx_drop_bps / 1000000;
     
       data.datasets[0].data.push({
-        x: displayTime,
+        x: timestamp,
         y: tx_bps
       });
       data.datasets[1].data.push({
-        x: displayTime,
+        x: timestamp,
         y: rx_bps
       });
       data.datasets[2].data.push({
-        x: displayTime,
+        x: timestamp,
         y: rx_drop_bps
       });
     }
@@ -111,7 +108,7 @@ for (let i = 0; i < profiles.length; i++) {
           text: graphTitle,
           font: {
             family: "monospace",
-            size: 24,
+            size: 36,
           }
         },
         legend: {
@@ -122,32 +119,50 @@ for (let i = 0; i < profiles.length; i++) {
             boxHeight: 18,
             font: {
               family: "monospace",
-              size: 20,
+              size: 28,
             }
           }
         }
       },
       elements: {
         point: {
-          radius: 0
-        }
+          radius: 0,
+        },
       },
       scales: {
         x: {
           ticks: {
-            fontSize: 18
+            font: {
+              family: "monospace",
+              size: 20,
+            },
+          },
+          type: 'timeseries',
+          time: {
+            displayFormats: {
+              millisecond: 'hh:mm:ss'
+            },
+            unit: 'millisecond',
+            stepSize: 4000,
           },
         },
         y: {
           ticks: {
-            fontSize: 18
+            font: {
+              family: "monospace",
+              size: 26,
+            }
           },
           position: 'right',
           type: 'linear',
           suggestedMin: '100',
           title: {
             text: 'Mbps',
-            display: true
+            display: true,
+            font: {
+              family: "monospace",
+              size: 30,
+            }
           }
         }
       }
@@ -171,6 +186,7 @@ for (let i = 0; i < profiles.length; i++) {
   const b64Data = myChart.toBase64Image();
   const b64Image = b64Data.replace(/^data:image\/\w+;base64,/, '');
 
-  writeFile(`output/graph/${prof.name}-mult_${prof.mult}-dur_${prof.duration}-sleep_${prof.sleep}-${Date.now()}.png`, b64Image, {encoding: 'base64'});
-  writeFile(`output/json/${prof.name}-mult_${prof.mult}-dur_${prof.duration}-sleep_${prof.sleep}-${Date.now()}.json`, JSON.stringify(outputJson));
+  const timestamp = Date.now();
+  writeFileSync(`output/graph/${prof.name}-mult_${prof.mult}-dur_${prof.duration}-sleep_${prof.sleep}-${timestamp}.png`, b64Image, {encoding: 'base64'});
+  writeFileSync(`output/json/${prof.name}-mult_${prof.mult}-dur_${prof.duration}-sleep_${prof.sleep}-${timestamp}.json`, JSON.stringify(outputJson));
 }
