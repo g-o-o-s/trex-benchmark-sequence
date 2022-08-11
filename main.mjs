@@ -10,10 +10,10 @@ import { default as child_process } from 'child_process';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { default as prettyms } from 'pretty-ms';
 
-import { default as bpsGraph } from './lib/graphs/bps.mjs';
-import { default as ppsGraph } from './lib/graphs/pps.mjs';
-import { default as flowsGraph } from './lib/graphs/flows.mjs';
-import { default as summaryStats } from './lib/humanreadable/summaryStats.mjs';
+import { drawGraph as bpsDrawGraph } from './lib/graphs/bps.mjs';
+import { drawGraph as ppsDrawGraph } from './lib/graphs/pps.mjs';
+import { drawGraph as flowsDrawGraph } from './lib/graphs/flows.mjs';
+import { printSummaryStats as printSummaryStats } from './lib/humanreadable/summaryStats.mjs';
 
 const initTime = new Date();
 
@@ -126,35 +126,35 @@ for (let i = 0; i < config.testProfiles.length; i++) {
 
           bpsData.tx_bps.push({
             x: timestamp,
-            y: tx_bps
+            y: input.stats.global.tx_bps
           });
 
           bpsData.rx_bps.push({
             x: timestamp,
-            y: rx_bps
+            y: input.stats.global.rx_bps
           });
 
           bpsData.rx_drop_bps.push({
             x: timestamp,
-            y: rx_drop_bps
+            y: input.stats.global.rx_drop_bps
           });
 
           ppsData.tx_pps.push({
             x: timestamp,
-            y: tx_pps
+            y: input.stats.global.tx_pps
           });
           ppsData.rx_pps.push({
             x: timestamp,
-            y: rx_pps
+            y: input.stats.global.rx_pps
           });
 
           flowsData.tx_cps.push({
             x: timestamp,
-            y: tx_cps
+            y: input.stats.global.tx_cps
           });
           flowsData.active_flows.push({
             x: timestamp,
-            y: active_flows
+            y: input.stats.global.active_flows
           });
 
         } catch (error) {
@@ -165,14 +165,14 @@ for (let i = 0; i < config.testProfiles.length; i++) {
     }
 
     // Print summary stats
-    summaryStats.printSummaryStats(summaryStats);
+    printSummaryStats(summaryStatsData);
 
     // setup graph title and config
     const graphTitle = `dut:${config.dutName} run:${config.runName} name:${prof.name} mult:${prof.mult} dur:${config.duration} prof:${prof.file}`;
 
-    const bpsGraphB64Image = bpsGraph.drawGraph(bpsData, graphTitle, config, prof);
-    const ppsGraphB64Image = ppsGraph.drawGraph(ppsData, graphTitle, config, prof);
-    const flowsGraphB64Image = flowsGraph.drawGraph(flowsData, graphTitle, config, prof);
+    const bpsGraphB64Image = bpsDrawGraph(bpsData, graphTitle, config, prof);
+    const ppsGraphB64Image = ppsDrawGraph(ppsData, graphTitle, config, prof);
+    const flowsGraphB64Image = flowsDrawGraph(flowsData, graphTitle, config, prof);
 
     console.log('');
 

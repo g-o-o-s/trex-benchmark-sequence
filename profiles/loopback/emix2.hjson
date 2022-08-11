@@ -4,7 +4,7 @@
   runName: 'full-l2loopback',                         // for display only
   description: 'straight up hardware loopback. 6in patch cable between client/server ports'
   sleep: 1,                                           // duration to sleep between perf samples
-  duration: 600,                                      // target test duration - not a hard limit
+  duration: 30,                                      // target test duration - not a hard limit
   latencyRate: 100,                                   // latency packet rate
   testProfiles: [                                     // array of profiles to run
     {
