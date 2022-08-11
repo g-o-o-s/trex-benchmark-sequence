@@ -16,55 +16,78 @@ class JsonOutput:
     self.timestamp = timestamp
     self.stats = stats
 
-def astf_test(server, mult, duration, profile_path, sleeptime):
-
-  # load ASTF profile
-  if not profile_path:
-      sys.stderr.write("Profile required\n")
-      sys.exit(1)
-
-  # create client
-  c = ASTFClient(server = server)
-
-  # connect to server
-  c.connect()
-  # take all the ports
-  c.reset()
-
-  c.load_profile(profile_path)
-  # clear the stats before injecting
-  c.clear_stats()
-
-  c.start(mult = mult, duration = duration)
-
-  while c.is_traffic_active():
-      stats = c.get_stats()
-
-      timestamp = time.mktime(datetime.datetime.now().timetuple()) * 1000
-      readableTime = datetime.datetime.fromtimestamp(timestamp / 1000)
-      readableTime = readableTime.strftime('%H:%M:%S')
-
-      tx_bps = sizeof_fmt(stats['global']['tx_bps'])
-      rx_bps = sizeof_fmt(stats['global']['rx_bps'])
-      tx_pps = round(stats['global']['tx_pps'] / 1000, 2)
-      rx_pps = round(stats['global']['rx_pps'] / 1000, 2)
-      rx_drop_bps = sizeof_fmt(stats['global']['rx_drop_bps'])
-
-      humanReadable = "[%s] bps: [%s / %s] pps: [%dK / %dK] drop: [%s]\n" % (readableTime, tx_bps, rx_bps, tx_pps, rx_pps, rx_drop_bps)
-
-      sys.stderr.write(humanReadable)
-      print(json.dumps(JsonOutput(timestamp, stats), default=vars))
-      time.sleep(sleeptime)
-
-  if c.get_warnings():
-      sys.stderr.write('\n\n*** test had warnings ****\n\n')
-      for w in c.get_warnings():
-          sys.stderr.write(w)
-          c.disconnect()
-          sys.exit(1)
-
-  c.disconnect()
-  sys.exit(0)
+def astf_test(server, mult, duration, profile_path, sleeptime, latency_pps):
+    # load ASTF profile
+    if not profile_path:
+        sys.stderr.write("Profile required\n")
+        sys.exit(1)
+  
+    # create client
+    c = ASTFClient(server = server)
+  
+    # connect to server
+    c.connect()
+    # take all the ports
+    c.reset()
+  
+    c.load_profile(profile_path)
+    # clear the stats before injecting
+    c.clear_stats()
+  
+    c.start(mult = mult, duration = duration, nc = False, block = True, latency_pps = latency_pps)
+  
+  
+    """
+    def start(self, mult = 1, duration = -1, nc = False, block = True, latency_pps = 0, ipv6 = False, pid_input = DEFAULT_PROFILE_ID, client_mask = 0xffffffff, e_duration = 0, t_duration = 0, dump_interval = 0):
+        Start the traffic on loaded profile. Procedure is async.
+        :parameters:
+            mult: int
+                Multiply total CPS of profile by this value.
+            duration: float
+                Start new flows for this duration.
+                Negative value means infinite
+            nc: bool
+                Do not wait for flows to close at end of duration.
+            block: bool
+                Wait for traffic to be started (operation is async).
+            latency_pps: uint32_t
+                Rate of latency packets. Zero value means disable.
+            ipv6: bool
+                Convert traffic to IPv6.
+            client_mask: uint32_t
+                Bitmask of enabled client ports.
+            pid_input: string
+                Input profile ID
+            e_duration: float
+                Maximum time to wait for one flow to be established.
+                Stop the flow generation when this time is over. Stop immediately with nc.
+                Disabled by default. Enabled by positive values.
+            t_duration: float
+                Maximum time to wait for all the flow to terminate gracefully after duration.
+                Stop immediately (overrides nc pararmeter) when this time is over.
+                Disabled by default. Enabled by non-zero values.
+            dump_interval: float
+                Interval time for periodic dump of TCP flow information: RTT, CWND, etc.
+                TCP flow dump enabled by non-zero values.
+        :raises:
+            + :exc:`TRexError`
+    """
+  
+    while c.is_traffic_active():
+        stats = c.get_stats()
+        timestamp = time.mktime(datetime.datetime.now().timetuple()) * 1000
+        print(json.dumps(JsonOutput(timestamp, stats), default=vars))
+        time.sleep(sleeptime)
+  
+    if c.get_warnings():
+        c.disconnect()
+        sys.stderr.write('\n\n*** test had warnings ****\n\n')
+        for w in c.get_warnings():
+            sys.stderr.write(w)
+        sys.exit(1)
+  
+    c.disconnect()
+    sys.exit(0)
 
 
 def parse_args():
@@ -93,6 +116,11 @@ def parse_args():
                         dest = 'sleeptime',
                         help='sleep between samples, default is 0.5 sec',
                         type = float)
+    parser.add_argument('-l',
+                        default = 0,
+                        dest = 'latency_pps',
+                        help='interval between latency packets',
+                        type = float)
 
     return parser.parse_args()
 
@@ -107,4 +135,4 @@ def sizeof_fmt(num, use_kibibyte=True):
     return "%3.1f %s" % (num, x)
 
 args = parse_args()
-astf_test(args.server, args.mult, args.duration, args.file, args.sleeptime)
+astf_test(args.server, args.mult, args.duration, args.file, args.sleeptime, args.latency_pps)
