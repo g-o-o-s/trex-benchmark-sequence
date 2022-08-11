@@ -1,15 +1,16 @@
 {
   server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
-  dutName: 'loopback',                                // for display only 
-  runName: 'someRunIdentifier',                               // for display only
+  dutName: 'r5s-openwrt-lan-bridge-wan-nat',          // for display only 
+  runName: '01',                                      // for display only
   sleep: 0.5,                                         // duration to sleep between perf samples
-  duration: 10,                                       // test duration - not a hard limit
+  duration: 30,                                       // test duration - not a hard limit
+  latencyInterval: 1000,                              // latency packet interval
   testProfiles: [                                     // array of profiles to run
     {
-      name: 'http_simple2',                           // for display only
+      name: 'emix2',                                  // for display only
       enabled: true,                                  // Is this profile enabled?
-      mult: 1400,                                     // multiplier/amplification factor
-      file: 'trex-core/scripts/astf/http_simple2.py', // astf file to run
+      mult: 2,                                        // multiplier/amplification factor
+      file: 'trex-core/scripts/astf/emix2.py',        // astf file to run
     }
   ]
 }

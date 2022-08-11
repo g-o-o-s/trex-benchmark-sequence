@@ -23,7 +23,7 @@ const testProfile = process.argv[2];
 
 const config = Hjson.parse(readFileSync(`profiles/${testProfile}.hjson`).toString());
 
-const filePath = `./output/${config.dutName}/${config.runName}/${initTime.toJSON().replaceAll(':', '-').substring(0, 16)}/`
+const filePath = `./output/${config.dutName}/${config.runName}/${initTime.toJSON().replaceAll(':', '-').substring(0, 19)}/`
 // create the output dir if required
 if (!existsSync(filePath)){
   mkdirSync(filePath, { recursive: true });
@@ -51,6 +51,7 @@ for (let i = 0; i < config.testProfiles.length; i++) {
       tx_bps: [],
       rx_bps: [],
       rx_drop_bps: [],
+      active_flows: [],
     };
   
     // note the use of spawnSync here - this could be improved with like, locking and a worker pool and stuff
@@ -61,37 +62,50 @@ for (let i = 0; i < config.testProfiles.length; i++) {
         '-m', `${prof.mult}`,
         '-d', `${config.duration}`,
         '-f', `${prof.file}`,
-        '-s', `${config.sleep}`
+        '-s', `${config.sleep}`,
+        '-l', `${config.latencyInterval}`
       ],
       {
         stdio: ['ignore', 'pipe', 'inherit'],
       }
     );
-  
+
     // setup datasets for graph
     const data = {
       datasets: [{
         label: 'tx_bps',
-        borderColor: "rgb(88, 107, 164)",
-        backgroundColor: "rgba(88, 107, 164, 0.2)",
-        fill: 1,
+        borderColor: "rgb(33, 131, 128)",
+        backgroundColor: "rgba(33, 131, 128, 0.1)",
+        fill: 'origin',
         tension: 0.1,
+        yAxisID: 'yRight',
         data: [],
       },
       {
         label: 'rx_bps',
-        borderColor: "rgb(245, 221, 144)",
-        backgroundColor: "rgba(245, 221, 144, 0.2)",
-        fill: 2,
+        borderColor: "rgb(115, 210, 222)",
+        backgroundColor: "rgba(115, 210, 222, 0.1)",
+        fill: 'origin',
         tension: 0.1,
+        yAxisID: 'yRight',
         data: [],
       },
       {
         label: 'rx_drop_bps',
-        borderColor: "rgb(247, 108, 94)",
-        backgroundColor:"rgba(247, 108, 94, 0.2)",
+        borderColor: "rgb(216, 17, 89)",
+        backgroundColor:"rgba(216, 17, 89, 0.1)",
         fill: 'origin',
         tension: 0.1,
+        yAxisID: 'yRight',
+        data: [],
+      },
+      {
+        label: 'active_flows',
+        borderColor: "rgb(251, 177, 60)",
+        backgroundColor:"rgba(251, 177, 60, 0.1)",
+        fill: 'none',
+        tension: 0.1,
+        yAxisID: 'yLeft',
         data: [],
       }]
     };
@@ -103,38 +117,45 @@ for (let i = 0; i < config.testProfiles.length; i++) {
   
       // yes this happens even though the python callee never outputs a blank line...
       if (input != '') {
-        input = JSON.parse(input);
-        outputJson.push(input);
+        try {
+          input = JSON.parse(input);
+          outputJson.push(input);
+    
+          // this is all for the human readable
+          const timestamp = new Date(input.timestamp);
   
-        // this is all for the human readable
-        const timestamp = new Date(input.timestamp);
-        const hours = timestamp.getHours();
-        const minutes = "0" + timestamp.getMinutes();
-        const seconds = "0" + timestamp.getSeconds();
-        const displayTime = `${hours}:${minutes}:${seconds}`;
-      
-        const tx_bps = input.stats.global.tx_bps / 1000000;
-        const rx_bps = input.stats.global.rx_bps / 1000000;
-        const rx_drop_bps = input.stats.global.rx_drop_bps / 1000000;
+          const tx_bps = input.stats.global.tx_bps / 1000000;
+          const rx_bps = input.stats.global.rx_bps / 1000000;
+          const rx_drop_bps = input.stats.global.rx_drop_bps / 1000000;
+          const active_flows = input.stats.global.active_flows;
   
-        // push data for our summary stats at the end
-        summaryStats.tx_bps.push(tx_bps);
-        summaryStats.rx_bps.push(rx_bps);
-        summaryStats.rx_drop_bps.push(rx_drop_bps);
+          // push data for our summary stats at the end
+          summaryStats.tx_bps.push(tx_bps);
+          summaryStats.rx_bps.push(rx_bps);
+          summaryStats.rx_drop_bps.push(rx_drop_bps);
+          summaryStats.active_flows.push(active_flows);
   
-        // and here we push data for the graph
-        data.datasets[0].data.push({
-          x: timestamp,
-          y: tx_bps
-        });
-        data.datasets[1].data.push({
-          x: timestamp,
-          y: rx_bps
-        });
-        data.datasets[2].data.push({
-          x: timestamp,
-          y: rx_drop_bps
-        });
+          // and here we push data for the graph
+          data.datasets[0].data.push({
+            x: timestamp,
+            y: tx_bps
+          });
+          data.datasets[1].data.push({
+            x: timestamp,
+            y: rx_bps
+          });
+          data.datasets[2].data.push({
+            x: timestamp,
+            y: rx_drop_bps
+          });
+          data.datasets[3].data.push({
+            x: timestamp,
+            y: active_flows
+          });
+        } catch (error) {
+          clog.error(error);
+          break;
+        }
       }
     }
   
@@ -188,16 +209,36 @@ for (let i = 0; i < config.testProfiles.length; i++) {
               stepSize: 4000,
             },
           },
-          y: {
+          yLeft: {
+            id: 'yLeft',
+            position: 'left',
             ticks: {
               font: {
                 family: "monospace",
-                size: 26,
+                size: 24,
               }
             },
-            position: 'right',
             type: 'linear',
-            suggestedMin: '100',
+
+            title: {
+              text: 'Active Flows',
+              display: true,
+              font: {
+                family: "monospace",
+                size: 30,
+              }
+            }
+          },
+          yRight: {
+            id: 'yRight',
+            position: 'right',
+            ticks: {
+              font: {
+                family: "monospace",
+                size: 24,
+              }
+            },
+            type: 'linear',
             title: {
               text: 'Mbps',
               display: true,
@@ -205,7 +246,10 @@ for (let i = 0; i < config.testProfiles.length; i++) {
                 family: "monospace",
                 size: 30,
               }
-            }
+            },
+            grid: {
+              drawOnChartArea: false, // only want the grid lines for one axis to show up
+            },
           }
         }
       },
@@ -234,51 +278,60 @@ for (let i = 0; i < config.testProfiles.length; i++) {
     // some basic analysis
     summaryStats.tx_bps = filterOutliers(summaryStats.tx_bps);
     summaryStats.rx_bps = filterOutliers(summaryStats.rx_bps);
-    summaryStats.rx_drop_bps = filterOutliers(summaryStats.rx_drop_bps)
+    summaryStats.rx_drop_bps = filterOutliers(summaryStats.rx_drop_bps);
+    summaryStats.active_flows = filterOutliers(summaryStats.active_flows);
   
     summaryStats.tx_bps_stddev = arr_stddev(summaryStats.tx_bps);
     summaryStats.rx_bps_stddev = arr_stddev(summaryStats.rx_bps);
     summaryStats.rx_drop_bps_stddev = arr_stddev(summaryStats.rx_drop_bps);
+    summaryStats.active_flows_stddev = arr_stddev(summaryStats.active_flows);
   
     summaryStats.tx_bps_mean = arr_mean(summaryStats.tx_bps);
     summaryStats.rx_bps_mean = arr_mean(summaryStats.rx_bps);
     summaryStats.rx_drop_bps_mean = arr_mean(summaryStats.rx_drop_bps);
+    summaryStats.active_flows_mean = arr_mean(summaryStats.active_flows);
   
     summaryStats.tx_bps_max = Math.max(...summaryStats.tx_bps);
     summaryStats.rx_bps_max = Math.max(...summaryStats.rx_bps);
     summaryStats.rx_drop_bps_max = Math.max(...summaryStats.rx_drop_bps);
+    summaryStats.active_flows_max = Math.max(...summaryStats.active_flows);
   
     summaryStats.tx_bps_min = Math.min(...summaryStats.tx_bps);
     summaryStats.rx_bps_min = Math.min(...summaryStats.rx_bps);
     summaryStats.rx_drop_bps_min = Math.min(...summaryStats.rx_drop_bps);
+    summaryStats.active_flows_min = Math.min(...summaryStats.active_flows);
   
     // i love formatting text for output, don't you?
     console.log('');
     console.log('All datasets have had outliers trimmed for this summary display.');
-  
+
     console.log('');
     console.log('averages:');
     console.log(`tx_bps: ${summaryStats.tx_bps_mean}`);
     console.log(`rx_bps: ${summaryStats.rx_bps_mean}`);
     console.log(`rx_drop_bps: ${summaryStats.rx_drop_bps_mean}`);
+    console.log(`active_flows: ${summaryStats.active_flows_mean}`);
   
     console.log('');
     console.log('stddevs:');
     console.log(`tx_bps: ${summaryStats.tx_bps_stddev}`);
     console.log(`rx_bps: ${summaryStats.rx_bps_stddev}`);
     console.log(`rx_drop_bps: ${summaryStats.rx_drop_bps_stddev}`);
-  
+    console.log(`active_flows: ${summaryStats.active_flows_stddev}`);
+    
     console.log('');
     console.log('max:');
     console.log(`tx_bps: ${summaryStats.tx_bps_max}`);
     console.log(`rx_bps: ${summaryStats.rx_bps_max}`);
     console.log(`rx_drop_bps: ${summaryStats.rx_drop_bps_max}`);
+    console.log(`active_flows: ${summaryStats.active_flows_max}`);
   
     console.log('');
     console.log('min:');
     console.log(`tx_bps: ${summaryStats.tx_bps_min}`);
     console.log(`rx_bps: ${summaryStats.rx_bps_min}`);
     console.log(`rx_drop_bps: ${summaryStats.rx_drop_bps_min}`);
+    console.log(`active_flows: ${summaryStats.active_flows_min}`);
   
     console.log('');
   
@@ -289,17 +342,17 @@ for (let i = 0; i < config.testProfiles.length; i++) {
     console.log(`Run start time: ${startTime.toUTCString()}`);
     console.log(`Run end time: ${finishTime.toUTCString()}`);
     
-    var diff = (finishTime.getTime() - expectedFinishTime.getTime());
+    var diff = (expectedFinishTime.getTime() - finishTime.getTime());
     var sign = diff < 0 ? -1 : 1;
     console.log(
       sign === 1 ? "Over by" : "Under by",
       prettyms(diff)
     );
-  
+
     console.log('');
   
     // build our dirs
-    const filePath = `./output/${config.dutName}/${config.runName}/${initTime.toJSON().replaceAll(':', '-').substring(0, 16)}/${prof.name}/`
+    const filePath = `./output/${config.dutName}/${config.runName}/${initTime.toJSON().replaceAll(':', '-').substring(0, 19)}/${prof.name}/`
     const fileName = `${config.dutName}-${config.runName}-${prof.name}-mult_${prof.mult}-dur_${config.duration}-${startTime.toJSON().replaceAll(':', '-')}`
   
     // create the output dir if required

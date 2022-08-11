@@ -1,0 +1,65 @@
+{
+  server: 'trex.straylight.goosga.ng',
+  dutName: 'r5s-openwrt-lan-bridge-wan-nat',
+  runName: 'full-suite-01',
+  description: 'r5s nat with lan ports bridged. T-Rex "Servers" on WAN side'
+  sleep: 0.5,
+  duration: 300,
+  latencyInterval: 1000,
+  testProfiles: [
+    {
+      name: 'http_simple2',
+      enabled: true,
+      mult: 1000,
+      file: 'trex-core/scripts/astf/http_simple2.py',
+    },
+    {
+      name: 'http_advanced',
+      enabled: true,
+      mult: 1000,
+      file: 'trex-core/scripts/astf/http_advanced.py',
+    },
+    {
+      name: 'udp_mix',
+      enabled: true,
+      mult: 1000,
+      file: 'trex-core/scripts/astf/udp_mix.py',
+    },
+    {
+      name: 'emix2',
+      enabled: true,
+      mult: 1,
+      file: 'trex-core/scripts/astf/emix2.py',
+    },
+    {
+      name: 'sfr_full_nat',
+      enabled: true,
+      mult: 1,
+      file: 'trex-core/scripts/astf/sfr_full_nat.py',
+    },
+    {
+      name: 'ftp_multiple_flows_sim',
+      enabled: true,
+      mult: 4,
+      file: 'trex-core/scripts/astf/ftp_multiple_flows_sim.py',
+    },
+    {
+      name: 'http_high_active_flows',
+      enabled: true,
+      mult: 1,
+      file: 'trex-core/scripts/astf/http_high_active_flows.py',
+    },
+    {
+      name: 'nginx_wget',
+      enabled: true,
+      mult: 4,
+      file: 'trex-core/scripts/astf/nginx_wget.py',
+    },
+    {
+      name: 'video_stream',
+      enabled: true,
+      mult: 10,
+      file: 'trex-core/scripts/astf/video_stream.py',
+    }
+  ]
+}
