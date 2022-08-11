@@ -1,10 +1,10 @@
 {
   server: 'trex.straylight.goosga.ng',
-  dutName: 'r5s-owrt-nat',
-  runName: 'full-yes_steering',
-  description: 'r5s nat with lan ports direct. T-Rex "Servers" on WAN side'
+  dutName: 'l2-hw-lo',
+  runName: 'full-l2loopback',
+  description: 'straight up hardware loopback. 6in patch cable between client/server ports'
   sleep: 1.0,
-  duration: 1200,
+  duration: 600,
   latencyRate: 100,
   testProfiles: [
     {
