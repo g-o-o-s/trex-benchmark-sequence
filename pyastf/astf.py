@@ -16,24 +16,29 @@ class JsonOutput:
     self.timestamp = timestamp
     self.stats = stats
 
-def astf_test(server, mult, duration, profile_path, sleeptime, latency_pps):
-    # load ASTF profile
+def astf_test(server, mult, duration, profile_path, sleeptime, latency_pps, tuneables):
     if not profile_path:
         sys.stderr.write("Profile required\n")
         sys.exit(1)
-  
+
     # create client
     c = ASTFClient(server = server)
   
     # connect to server
     c.connect()
+
     # take all the ports
     c.reset()
-  
-    c.load_profile(profile_path)
+
+    # load ASTF profile
+    if not tuneables:
+        c.load_profile(profile_path)
+    else:
+        c.load_profile(profile_path, dict(map(lambda s: s.split("="), tuneables.split(","))))
+
     # clear the stats before injecting
     c.clear_stats()
-  
+
     c.start(mult = mult, duration = duration, nc = False, block = True, latency_pps = latency_pps)
   
   
@@ -100,7 +105,7 @@ def parse_args():
     parser.add_argument('-m',
                         dest = 'mult',
                         help='multiplier of traffic, see ASTF help for more info',
-                        default = 100,
+                        default = 1,
                         type = int)
     parser.add_argument('-f',
                         dest = 'file',
@@ -119,8 +124,13 @@ def parse_args():
     parser.add_argument('-l',
                         default = 0,
                         dest = 'latency_pps',
-                        help='interval between latency packets',
-                        type = float)
+                        help='interval latency packets',
+                        type = int)
+    parser.add_argument('-t',
+                        default = '',
+                        dest = 'tuneables',
+                        help='tuneables',
+                        type = str)
 
     return parser.parse_args()
 
@@ -135,4 +145,4 @@ def sizeof_fmt(num, use_kibibyte=True):
     return "%3.1f %s" % (num, x)
 
 args = parse_args()
-astf_test(args.server, args.mult, args.duration, args.file, args.sleeptime, args.latency_pps)
+astf_test(args.server, args.mult, args.duration, args.file, args.sleeptime, args.latency_pps, args.tuneables)

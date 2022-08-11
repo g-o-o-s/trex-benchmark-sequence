@@ -1,15 +1,15 @@
 {
   server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
-  dutName: 'r5s-openwrt-lan-bridge-wan-nat',          // for display only 
+  dutName: 'r5s-openwrt-lan-wan-nat',                 // for display only 
   runName: '01',                                      // for display only
-  sleep: 0.5,                                         // duration to sleep between perf samples
-  duration: 30,                                       // test duration - not a hard limit
-  latencyInterval: 1000,                              // latency packet interval
+  sleep: 1,                                           // duration to sleep between perf samples
+  duration: 600,                                      // target test duration - not a hard limit
+  latencyRate: 100,                                   // latency packet rate
   testProfiles: [                                     // array of profiles to run
     {
       name: 'emix2',                                  // for display only
       enabled: true,                                  // Is this profile enabled?
-      mult: 2,                                        // multiplier/amplification factor
+      mult: 4,                                        // multiplier/amplification factor
       file: 'trex-core/scripts/astf/emix2.py',        // astf file to run
     }
   ]

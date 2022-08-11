@@ -1,0 +1,29 @@
+{
+  server: 'trex.straylight.goosga.ng',
+  dutName: 'r5s-openwrt-lan-wan-nat',
+  runName: 'short-suite-01',
+  description: 'r5s nat with lan ports direct. T-Rex "Servers" on WAN side'
+  sleep: 0.5,
+  duration: 60,
+  latencyRate: 1000,
+  testProfiles: [
+    {
+      name: 'udp_mix',
+      enabled: true,
+      mult: 10000,
+      file: 'trex-core/scripts/astf/udp_mix.py',
+    },
+    {
+      name: 'emix2',
+      enabled: true,
+      mult: 1,
+      file: 'trex-core/scripts/astf/emix2.py',
+    },
+    {
+      name: 'sfr_full_nat',
+      enabled: true,
+      mult: 1,
+      file: 'trex-core/scripts/astf/sfr_full_nat.py',
+    },
+  ]
+}
