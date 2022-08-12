@@ -99,17 +99,17 @@ for (let i = 0; i < config.testProfiles.length; i++) {
 
           bpsData.tx_bps.push({
             x: timestamp,
-            y: input.stats.global.tx_bps
+            y: input.stats.global.tx_bps / 1000000
           });
 
           bpsData.rx_bps.push({
             x: timestamp,
-            y: input.stats.global.rx_bps
+            y: input.stats.global.rx_bps / 1000000
           });
 
           bpsData.rx_drop_bps.push({
             x: timestamp,
-            y: input.stats.global.rx_drop_bps
+            y: input.stats.global.rx_drop_bps / 1000000
           });
 
           ppsData.tx_pps.push({
