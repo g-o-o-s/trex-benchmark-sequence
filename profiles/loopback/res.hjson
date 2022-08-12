@@ -8,10 +8,10 @@
   latencyRate: 100,                                   // latency packet rate
   testProfiles: [                                     // array of profiles to run
     {
-      name: 'emix2',                                  // for display only
+      name: 'res',                                  // for display only
       enabled: true,                                  // Is this profile enabled?
       mult: 4,                                        // multiplier/amplification factor
-      file: 'trex-core/scripts/astf/emix2.py',        // astf file to run
+      file: 'trex-core/scripts/astf/res.py',        // astf file to run
     }
   ]
 }
