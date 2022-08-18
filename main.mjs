@@ -9,26 +9,34 @@ import { hideBin } from 'yargs/helpers'
 const session_id = 1234567890;
 const force_acquire = true;
 
+const initTime = new Date();
+console.log(`--- Logs begin at ${initTime.toUTCString()} ---`);
+
 yargs(hideBin(process.argv))
   .usage('Usage: $0 <command> [options]')
   .command({
-    command: 'run <profile> [options]',
-    describe: 'run a profile',
+    command: 'run <sequence> [options]',
+    describe: 'run a sequence',
     builder: {
       debug: {
         describe: 'debug mode',
         type: 'boolean',
       },
     },
-    handler: runProfile,
+    handler: runSequence,
   })
   .showHelpOnFail(true)
   .demandCommand(1, '')
   .strict()
   .help().argv;
 
-function runProfile(argv) {
+function runSequence(argv) {
   console.log(argv);
-  const profile = argv.profile;
-  console.log(`About to run profile [${profile}]`);
+  const sequence = argv.sequence;
+  console.log(`About to run sequence [${sequence}]`);
+  // Read in sequence
+
+  // for loop
+
+  // 
 }
