@@ -10,8 +10,8 @@ This is a lil blob to make running repeatable benchmarks and generating consiste
 - go get some coffee. trex-core is big
 - npm install (written with node 16.x)
 - `./t-rex-64 -i --astf -c 2` on your t-rex appliance/server
-- edit/create hjson configs
-- `node main.mjs loopback/emix2_short`
+- edit/create hjson configs under `sequences/`
+- `./rexbench run sequences/sfr.hjson -g`
 - ???
 - GRAPHS
 

@@ -1,0 +1,17 @@
+{
+  server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
+  dutName: 'someDUT',                                 // for display only
+  runName: 'someRUN',                                 // for display only
+  description: 'example json profile'
+  testProfiles: [                                     // array of profiles to run
+    {
+      name: 'http_simple',                            // Profile identifier
+      enabled: true,                                  // Is this profile enabled?
+      mult: 1,                                        // Multiplier/amplification factor
+      file: 'profiles/http_simple/http_simple.json',  // Relative to repo root
+      sampleInterval: 500,                            // duration to sleep between perf samples - in ms
+      duration: 60,                                   // target test duration - not a hard limit
+      latencyRate: 1000,                              // latency packet rate
+    }
+  ]
+}

@@ -1,0 +1,1405 @@
+/home/perse/repos/trex-stuff/benchmark/
+About to run sequence [sequences/loopback/sfr.hjson]
+Loading profile from disk
+About to run profile [sfr]
+Connecting to T-Rex
+Attempting to acquire ports
+Ports acquired, Session Handler: KQAgE7ip
+Port IDs: [0: spbawRFt] [1: vny0ekmx]
+Uploading profile
+Available profiles: ["sfr","_"]
+Sampling data
+Attempting to start traffic
+Stopping traffic
+Releasing ports
+Generating graphs
+{
+  "timestamp": 1660847994358,
+  "stats": {
+    "m_active_flows": 1701,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 7.592120604989462e-19,
+    "m_cpu_util": 0.03656250983476639,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 1701,
+    "m_platform_factor": 1,
+    "m_rx_bps": 5.55484369439696e-13,
+    "m_rx_core_pps": 2.076061147705986e-22,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 9.77994617053419e-16,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 413017232,
+    "m_total_rx_pkts": 5817126,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 413014976,
+    "m_total_tx_pkts": 5817115,
+    "m_tx_bps": 5.551739623577134e-13,
+    "m_tx_cps": 1.8736383351643904e-16,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 9.774728447579104e-16
+  }
+}
+{
+  "timestamp": 1660847995358,
+  "stats": {
+    "m_active_flows": 3744,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.3526909351348877,
+    "m_cpu_util": 0.1918593794107437,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 3744,
+    "m_platform_factor": 1,
+    "m_rx_bps": 1353341.25,
+    "m_rx_core_pps": 1.038030573852993e-22,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 2382.35302734375,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 413653456,
+    "m_total_rx_pkts": 5826087,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 413651690,
+    "m_total_tx_pkts": 5826083,
+    "m_tx_bps": 1353341.25,
+    "m_tx_cps": 1019.6078491210938,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 2382.35302734375
+  }
+}
+{
+  "timestamp": 1660847996359,
+  "stats": {
+    "m_active_flows": 5788,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.5708131194114685,
+    "m_cpu_util": 0.2882070243358612,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 5788,
+    "m_platform_factor": 1,
+    "m_rx_bps": 3289329.5,
+    "m_rx_core_pps": 5.190152869264965e-23,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 5790.6865234375,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 414556554,
+    "m_total_rx_pkts": 5838806,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 414554298,
+    "m_total_tx_pkts": 5838795,
+    "m_tx_bps": 3290247,
+    "m_tx_cps": 1528.921630859375,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 5792.1572265625
+  }
+}
+{
+  "timestamp": 1660847997360,
+  "stats": {
+    "m_active_flows": 7834,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.7056149840354919,
+    "m_cpu_util": 0.37809276580810547,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 7834,
+    "m_platform_factor": 1,
+    "m_rx_bps": 5334994.5,
+    "m_rx_core_pps": 2.5950764346324825e-23,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 9392.40234375,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 415714088,
+    "m_total_rx_pkts": 5855109,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 415713430,
+    "m_total_tx_pkts": 5855121,
+    "m_tx_bps": 5335758.5,
+    "m_tx_cps": 1783.5784912109375,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 9393.626953125
+  }
+}
+{
+  "timestamp": 1660847998362,
+  "stats": {
+    "m_active_flows": 9880,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.7881523370742798,
+    "m_cpu_util": 0.4645695686340332,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 9880,
+    "m_platform_factor": 1,
+    "m_rx_bps": 7316463.5,
+    "m_rx_core_pps": 1.2975382173162413e-23,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 12880.8544921875,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 417019054,
+    "m_total_rx_pkts": 5873489,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 417016798,
+    "m_total_tx_pkts": 5873478,
+    "m_tx_bps": 7323032,
+    "m_tx_cps": 1921.4921875,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 12892.3583984375
+  }
+}
+{
+  "timestamp": 1660847999362,
+  "stats": {
+    "m_active_flows": 10864,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.8560935258865356,
+    "m_cpu_util": 0.5228021740913391,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 11923,
+    "m_platform_factor": 1,
+    "m_rx_bps": 8951048,
+    "m_rx_core_pps": 6.487691086581206e-24,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 15759.0546875,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 418475492,
+    "m_total_rx_pkts": 5894003,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 418474740,
+    "m_total_tx_pkts": 5894012,
+    "m_tx_bps": 8951351,
+    "m_tx_cps": 1979.86376953125,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 15759.4140625
+  }
+}
+{
+  "timestamp": 1660848000363,
+  "stats": {
+    "m_active_flows": 10871,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.8709848523139954,
+    "m_cpu_util": 0.5917266607284546,
+    "m_cpu_util_raw": 0.25,
+    "m_open_flows": 13967,
+    "m_platform_factor": 1,
+    "m_rx_bps": 10307461,
+    "m_rx_core_pps": 3.243845543290603e-24,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 18146.68359375,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 419925452,
+    "m_total_rx_pkts": 5914423,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 419926022,
+    "m_total_tx_pkts": 5914452,
+    "m_tx_bps": 10307699,
+    "m_tx_cps": 2009.539794921875,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 18147.353515625
+  }
+}
+{
+  "timestamp": 1660848001363,
+  "stats": {
+    "m_active_flows": 10852,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.838350772857666,
+    "m_cpu_util": 0.6538574695587158,
+    "m_cpu_util_raw": 0.25,
+    "m_open_flows": 16011,
+    "m_platform_factor": 1,
+    "m_rx_bps": 10964844,
+    "m_rx_core_pps": 1.6219227716453016e-24,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 19304.224609375,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 421380066,
+    "m_total_rx_pkts": 5934912,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 421379308,
+    "m_total_tx_pkts": 5934922,
+    "m_tx_bps": 10963238,
+    "m_tx_cps": 2023.8875732421875,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 19301.6171875
+  }
+}
+{
+  "timestamp": 1660848002365,
+  "stats": {
+    "m_active_flows": 10842,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.7928725481033325,
+    "m_cpu_util": 0.7120805978775024,
+    "m_cpu_util_raw": 0.25,
+    "m_open_flows": 18057,
+    "m_platform_factor": 1,
+    "m_rx_bps": 11295317,
+    "m_rx_core_pps": 8.109613858226508e-25,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 19885.935546875,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 422833612,
+    "m_total_rx_pkts": 5955383,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 422832094,
+    "m_total_tx_pkts": 5955382,
+    "m_tx_bps": 11291783,
+    "m_tx_cps": 2031.5516357421875,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 19879.732421875
+  }
+}
+{
+  "timestamp": 1660848003365,
+  "stats": {
+    "m_active_flows": 10861,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.7650514245033264,
+    "m_cpu_util": 0.7493729591369629,
+    "m_cpu_util_raw": 0.25,
+    "m_open_flows": 20100,
+    "m_platform_factor": 1,
+    "m_rx_bps": 11465330,
+    "m_rx_core_pps": 4.054806929113254e-25,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 20185.54296875,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 424286146,
+    "m_total_rx_pkts": 5975843,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 424284266,
+    "m_total_tx_pkts": 5975837,
+    "m_tx_bps": 11466177,
+    "m_tx_cps": 2044.983642578125,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 20186.89453125
+  }
+}
+{
+  "timestamp": 1660848004367,
+  "stats": {
+    "m_active_flows": 0,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.7686835527420044,
+    "m_cpu_util": 0.70952969789505,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 20106,
+    "m_platform_factor": 1,
+    "m_rx_bps": 10910241,
+    "m_rx_core_pps": 2.027403464556627e-25,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 19208.947265625,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 424413102,
+    "m_total_rx_pkts": 5977632,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 424410846,
+    "m_total_tx_pkts": 5977621,
+    "m_tx_bps": 10908076,
+    "m_tx_cps": 1336.70751953125,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 19205.212890625
+  }
+}
+{
+  "timestamp": 1660848005368,
+  "stats": {
+    "m_active_flows": 0,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.5124557018280029,
+    "m_cpu_util": 0.5321472883224487,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 20106,
+    "m_platform_factor": 1,
+    "m_rx_bps": 5455120.5,
+    "m_rx_core_pps": 1.0137017322783135e-25,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 9604.4736328125,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 424413102,
+    "m_total_rx_pkts": 5977632,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 424410846,
+    "m_total_tx_pkts": 5977621,
+    "m_tx_bps": 5454038,
+    "m_tx_cps": 668.353759765625,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 9602.6064453125
+  }
+}
+{
+  "timestamp": 1660848006370,
+  "stats": {
+    "m_active_flows": 0,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.34163710474967957,
+    "m_cpu_util": 0.39911046624183655,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 20106,
+    "m_platform_factor": 1,
+    "m_rx_bps": 2727560.25,
+    "m_rx_core_pps": 5.0685086613915674e-26,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 4802.23681640625,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 424413102,
+    "m_total_rx_pkts": 5977632,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 424410846,
+    "m_total_tx_pkts": 5977621,
+    "m_tx_bps": 2727019,
+    "m_tx_cps": 334.1768798828125,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 4801.30322265625
+  }
+}
+{
+  "timestamp": 1660848007370,
+  "stats": {
+    "m_active_flows": 0,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.22775807976722717,
+    "m_cpu_util": 0.299332857131958,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 20106,
+    "m_platform_factor": 1,
+    "m_rx_bps": 1363780.125,
+    "m_rx_core_pps": 2.5342543306957837e-26,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 2401.118408203125,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 424413102,
+    "m_total_rx_pkts": 5977632,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 424410846,
+    "m_total_tx_pkts": 5977621,
+    "m_tx_bps": 1363509.5,
+    "m_tx_cps": 167.08843994140625,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 2400.651611328125
+  }
+}
+{
+  "timestamp": 1660848008372,
+  "stats": {
+    "m_active_flows": 0,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.15183871984481812,
+    "m_cpu_util": 0.2244996428489685,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 20106,
+    "m_platform_factor": 1,
+    "m_rx_bps": 681890.0625,
+    "m_rx_core_pps": 1.2671271653478919e-26,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 1200.5592041015625,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 424413102,
+    "m_total_rx_pkts": 5977632,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 424410846,
+    "m_total_tx_pkts": 5977621,
+    "m_tx_bps": 681754.75,
+    "m_tx_cps": 83.54421997070312,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 1200.3258056640625
+  }
+}
+{
+  "timestamp": 1660848009373,
+  "stats": {
+    "m_active_flows": 0,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.10122580826282501,
+    "m_cpu_util": 0.16837473213672638,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 20106,
+    "m_platform_factor": 1,
+    "m_rx_bps": 340945.03125,
+    "m_rx_core_pps": 6.335635826739459e-27,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 600.2796020507812,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 424413102,
+    "m_total_rx_pkts": 5977632,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 424410846,
+    "m_total_tx_pkts": 5977621,
+    "m_tx_bps": 340877.375,
+    "m_tx_cps": 41.77210998535156,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 600.1629028320312
+  }
+}
+{
+  "timestamp": 1660848010374,
+  "stats": {
+    "m_active_flows": 0,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.06748387217521667,
+    "m_cpu_util": 0.12628105282783508,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 20106,
+    "m_platform_factor": 1,
+    "m_rx_bps": 170472.515625,
+    "m_rx_core_pps": 3.1678179133697297e-27,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 300.1398010253906,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 424413102,
+    "m_total_rx_pkts": 5977632,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 424410846,
+    "m_total_tx_pkts": 5977621,
+    "m_tx_bps": 170438.6875,
+    "m_tx_cps": 20.88605499267578,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 300.0814514160156
+  }
+}
+{
+  "timestamp": 1660848011376,
+  "stats": {
+    "m_active_flows": 0,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.04498925060033798,
+    "m_cpu_util": 0.09471078217029572,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 20106,
+    "m_platform_factor": 1,
+    "m_rx_bps": 85236.2578125,
+    "m_rx_core_pps": 1.5839089566848648e-27,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 150.0699005126953,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 424413102,
+    "m_total_rx_pkts": 5977632,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 424410846,
+    "m_total_tx_pkts": 5977621,
+    "m_tx_bps": 85219.34375,
+    "m_tx_cps": 10.44302749633789,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 150.0407257080078
+  }
+}
+{
+  "timestamp": 1660848012376,
+  "stats": {
+    "m_active_flows": 0,
+    "m_active_sockets": 0,
+    "m_bw_per_core": 0.029992831870913506,
+    "m_cpu_util": 0.07103309035301208,
+    "m_cpu_util_raw": 0,
+    "m_open_flows": 20106,
+    "m_platform_factor": 1,
+    "m_rx_bps": 42618.12890625,
+    "m_rx_core_pps": 7.919544783424324e-28,
+    "m_rx_cpu_util": 0,
+    "m_rx_drop_bps": 0,
+    "m_rx_pps": 75.03495025634766,
+    "m_socket_util": 0,
+    "m_total_alloc_error": 0,
+    "m_total_clients": 0,
+    "m_total_nat_active": 0,
+    "m_total_nat_learn_error": 0,
+    "m_total_nat_no_fid": 0,
+    "m_total_nat_open": 0,
+    "m_total_nat_syn_wait": 0,
+    "m_total_nat_time_out": 0,
+    "m_total_nat_time_out_wait_ack": 0,
+    "m_total_queue_drop": 0,
+    "m_total_queue_full": 0,
+    "m_total_rx_bytes": 424413102,
+    "m_total_rx_pkts": 5977632,
+    "m_total_servers": 0,
+    "m_total_tx_bytes": 424410846,
+    "m_total_tx_pkts": 5977621,
+    "m_tx_bps": 42609.671875,
+    "m_tx_cps": 5.221513748168945,
+    "m_tx_expected_bps": 0,
+    "m_tx_expected_cps": 0,
+    "m_tx_expected_pps": 0,
+    "m_tx_pps": 75.0203628540039
+  }
+}
+18  14:40:13.372 > …/lib/graphs/generateGraphs.mjs:74                 drawGraphs: [Object] (3): {
+    tx_bps [Array] (19): [
+        0 [Object] (2): {
+            x: 1660847994358
+            y: 5.551739623577134e-19
+        }
+        1 [Object] (2): {
+            x: 1660847995358
+            y: 1.35334125
+        }
+        2 [Object] (2): {
+            x: 1660847996359
+            y: 3.290247
+        }
+        3 [Object] (2): {
+            x: 1660847997360
+            y: 5.3357585
+        }
+        4 [Object] (2): {
+            x: 1660847998362
+            y: 7.323032
+        }
+        5 [Object] (2): {
+            x: 1660847999362
+            y: 8.951351
+        }
+        6 [Object] (2): {
+            x: 1660848000363
+            y: 10.307699
+        }
+        7 [Object] (2): {
+            x: 1660848001363
+            y: 10.963238
+        }
+        8 [Object] (2): {
+            x: 1660848002365
+            y: 11.291783
+        }
+        9 [Object] (2): {
+            x: 1660848003365
+            y: 11.466177
+        }
+        10 [Object] (2): {
+            x: 1660848004367
+            y: 10.908076
+        }
+        11 [Object] (2): {
+            x: 1660848005368
+            y: 5.454038
+        }
+        12 [Object] (2): {
+            x: 1660848006370
+            y: 2.727019
+        }
+        13 [Object] (2): {
+            x: 1660848007370
+            y: 1.3635095
+        }
+        14 [Object] (2): {
+            x: 1660848008372
+            y: 0.68175475
+        }
+        15 [Object] (2): {
+            x: 1660848009373
+            y: 0.340877375
+        }
+        16 [Object] (2): {
+            x: 1660848010374
+            y: 0.1704386875
+        }
+        17 [Object] (2): {
+            x: 1660848011376
+            y: 0.08521934375
+        }
+        18 [Object] (2): {
+            x: 1660848012376
+            y: 0.042609671875
+        }
+    ]
+    rx_bps [Array] (19): [
+        0 [Object] (2): {
+            x: 1660847994358
+            y: 5.554843694396961e-19
+        }
+        1 [Object] (2): {
+            x: 1660847995358
+            y: 1.35334125
+        }
+        2 [Object] (2): {
+            x: 1660847996359
+            y: 3.2893295
+        }
+        3 [Object] (2): {
+            x: 1660847997360
+            y: 5.3349945
+        }
+        4 [Object] (2): {
+            x: 1660847998362
+            y: 7.3164635
+        }
+        5 [Object] (2): {
+            x: 1660847999362
+            y: 8.951048
+        }
+        6 [Object] (2): {
+            x: 1660848000363
+            y: 10.307461
+        }
+        7 [Object] (2): {
+            x: 1660848001363
+            y: 10.964844
+        }
+        8 [Object] (2): {
+            x: 1660848002365
+            y: 11.295317
+        }
+        9 [Object] (2): {
+            x: 1660848003365
+            y: 11.46533
+        }
+        10 [Object] (2): {
+            x: 1660848004367
+            y: 10.910241
+        }
+        11 [Object] (2): {
+            x: 1660848005368
+            y: 5.4551205
+        }
+        12 [Object] (2): {
+            x: 1660848006370
+            y: 2.72756025
+        }
+        13 [Object] (2): {
+            x: 1660848007370
+            y: 1.363780125
+        }
+        14 [Object] (2): {
+            x: 1660848008372
+            y: 0.6818900625
+        }
+        15 [Object] (2): {
+            x: 1660848009373
+            y: 0.34094503125
+        }
+        16 [Object] (2): {
+            x: 1660848010374
+            y: 0.170472515625
+        }
+        17 [Object] (2): {
+            x: 1660848011376
+            y: 0.0852362578125
+        }
+        18 [Object] (2): {
+            x: 1660848012376
+            y: 0.04261812890625
+        }
+    ]
+    rx_drop_bps [Array] (19): [
+        0 [Object] (2): {
+            x: 1660847994358
+            y: 0
+        }
+        1 [Object] (2): {
+            x: 1660847995358
+            y: 0
+        }
+        2 [Object] (2): {
+            x: 1660847996359
+            y: 0
+        }
+        3 [Object] (2): {
+            x: 1660847997360
+            y: 0
+        }
+        4 [Object] (2): {
+            x: 1660847998362
+            y: 0
+        }
+        5 [Object] (2): {
+            x: 1660847999362
+            y: 0
+        }
+        6 [Object] (2): {
+            x: 1660848000363
+            y: 0
+        }
+        7 [Object] (2): {
+            x: 1660848001363
+            y: 0
+        }
+        8 [Object] (2): {
+            x: 1660848002365
+            y: 0
+        }
+        9 [Object] (2): {
+            x: 1660848003365
+            y: 0
+        }
+        10 [Object] (2): {
+            x: 1660848004367
+            y: 0
+        }
+        11 [Object] (2): {
+            x: 1660848005368
+            y: 0
+        }
+        12 [Object] (2): {
+            x: 1660848006370
+            y: 0
+        }
+        13 [Object] (2): {
+            x: 1660848007370
+            y: 0
+        }
+        14 [Object] (2): {
+            x: 1660848008372
+            y: 0
+        }
+        15 [Object] (2): {
+            x: 1660848009373
+            y: 0
+        }
+        16 [Object] (2): {
+            x: 1660848010374
+            y: 0
+        }
+        17 [Object] (2): {
+            x: 1660848011376
+            y: 0
+        }
+        18 [Object] (2): {
+            x: 1660848012376
+            y: 0
+        }
+    ]
+}
+18  14:40:13.390 > …/lib/graphs/generateGraphs.mjs:75                 drawGraphs: [Object] (3): {
+    tx_pps [Array] (19): [
+        0 [Object] (2): {
+            x: 1660847994358
+            y: 9.774728447579104e-16
+        }
+        1 [Object] (2): {
+            x: 1660847995358
+            y: 2382.35302734375
+        }
+        2 [Object] (2): {
+            x: 1660847996359
+            y: 5792.1572265625
+        }
+        3 [Object] (2): {
+            x: 1660847997360
+            y: 9393.626953125
+        }
+        4 [Object] (2): {
+            x: 1660847998362
+            y: 12892.3583984375
+        }
+        5 [Object] (2): {
+            x: 1660847999362
+            y: 15759.4140625
+        }
+        6 [Object] (2): {
+            x: 1660848000363
+            y: 18147.353515625
+        }
+        7 [Object] (2): {
+            x: 1660848001363
+            y: 19301.6171875
+        }
+        8 [Object] (2): {
+            x: 1660848002365
+            y: 19879.732421875
+        }
+        9 [Object] (2): {
+            x: 1660848003365
+            y: 20186.89453125
+        }
+        10 [Object] (2): {
+            x: 1660848004367
+            y: 19205.212890625
+        }
+        11 [Object] (2): {
+            x: 1660848005368
+            y: 9602.6064453125
+        }
+        12 [Object] (2): {
+            x: 1660848006370
+            y: 4801.30322265625
+        }
+        13 [Object] (2): {
+            x: 1660848007370
+            y: 2400.651611328125
+        }
+        14 [Object] (2): {
+            x: 1660848008372
+            y: 1200.3258056640625
+        }
+        15 [Object] (2): {
+            x: 1660848009373
+            y: 600.1629028320312
+        }
+        16 [Object] (2): {
+            x: 1660848010374
+            y: 300.0814514160156
+        }
+        17 [Object] (2): {
+            x: 1660848011376
+            y: 150.0407257080078
+        }
+        18 [Object] (2): {
+            x: 1660848012376
+            y: 75.0203628540039
+        }
+    ]
+    rx_pps [Array] (19): [
+        0 [Object] (2): {
+            x: 1660847994358
+            y: 9.77994617053419e-16
+        }
+        1 [Object] (2): {
+            x: 1660847995358
+            y: 2382.35302734375
+        }
+        2 [Object] (2): {
+            x: 1660847996359
+            y: 5790.6865234375
+        }
+        3 [Object] (2): {
+            x: 1660847997360
+            y: 9392.40234375
+        }
+        4 [Object] (2): {
+            x: 1660847998362
+            y: 12880.8544921875
+        }
+        5 [Object] (2): {
+            x: 1660847999362
+            y: 15759.0546875
+        }
+        6 [Object] (2): {
+            x: 1660848000363
+            y: 18146.68359375
+        }
+        7 [Object] (2): {
+            x: 1660848001363
+            y: 19304.224609375
+        }
+        8 [Object] (2): {
+            x: 1660848002365
+            y: 19885.935546875
+        }
+        9 [Object] (2): {
+            x: 1660848003365
+            y: 20185.54296875
+        }
+        10 [Object] (2): {
+            x: 1660848004367
+            y: 19208.947265625
+        }
+        11 [Object] (2): {
+            x: 1660848005368
+            y: 9604.4736328125
+        }
+        12 [Object] (2): {
+            x: 1660848006370
+            y: 4802.23681640625
+        }
+        13 [Object] (2): {
+            x: 1660848007370
+            y: 2401.118408203125
+        }
+        14 [Object] (2): {
+            x: 1660848008372
+            y: 1200.5592041015625
+        }
+        15 [Object] (2): {
+            x: 1660848009373
+            y: 600.2796020507812
+        }
+        16 [Object] (2): {
+            x: 1660848010374
+            y: 300.1398010253906
+        }
+        17 [Object] (2): {
+            x: 1660848011376
+            y: 150.0699005126953
+        }
+        18 [Object] (2): {
+            x: 1660848012376
+            y: 75.03495025634766
+        }
+    ]
+    delta [Array] (19): [
+        0 [Object] (2): {
+            x: 1660847994358
+            y: -5.21772295508649e-19
+        }
+        1 [Object] (2): {
+            x: 1660847995358
+            y: 0
+        }
+        2 [Object] (2): {
+            x: 1660847996359
+            y: 1.470703125
+        }
+        3 [Object] (2): {
+            x: 1660847997360
+            y: 1.224609375
+        }
+        4 [Object] (2): {
+            x: 1660847998362
+            y: 11.50390625
+        }
+        5 [Object] (2): {
+            x: 1660847999362
+            y: 0.359375
+        }
+        6 [Object] (2): {
+            x: 1660848000363
+            y: 0.669921875
+        }
+        7 [Object] (2): {
+            x: 1660848001363
+            y: -2.607421875
+        }
+        8 [Object] (2): {
+            x: 1660848002365
+            y: -6.203125
+        }
+        9 [Object] (2): {
+            x: 1660848003365
+            y: 1.3515625
+        }
+        10 [Object] (2): {
+            x: 1660848004367
+            y: -3.734375
+        }
+        11 [Object] (2): {
+            x: 1660848005368
+            y: -1.8671875
+        }
+        12 [Object] (2): {
+            x: 1660848006370
+            y: -0.93359375
+        }
+        13 [Object] (2): {
+            x: 1660848007370
+            y: -0.466796875
+        }
+        14 [Object] (2): {
+            x: 1660848008372
+            y: -0.2333984375
+        }
+        15 [Object] (2): {
+            x: 1660848009373
+            y: -0.11669921875
+        }
+        16 [Object] (2): {
+            x: 1660848010374
+            y: -0.058349609375
+        }
+        17 [Object] (2): {
+            x: 1660848011376
+            y: -0.0291748046875
+        }
+        18 [Object] (2): {
+            x: 1660848012376
+            y: -0.01458740234375
+        }
+    ]
+}
+18  14:40:13.404 > …/lib/graphs/generateGraphs.mjs:76                 drawGraphs: [Object] (2): {
+    tx_cps [Array] (19): [
+        0 [Object] (2): {
+            x: 1660847994358
+            y: 1.8736383351643904e-16
+        }
+        1 [Object] (2): {
+            x: 1660847995358
+            y: 1019.6078491210938
+        }
+        2 [Object] (2): {
+            x: 1660847996359
+            y: 1528.921630859375
+        }
+        3 [Object] (2): {
+            x: 1660847997360
+            y: 1783.5784912109375
+        }
+        4 [Object] (2): {
+            x: 1660847998362
+            y: 1921.4921875
+        }
+        5 [Object] (2): {
+            x: 1660847999362
+            y: 1979.86376953125
+        }
+        6 [Object] (2): {
+            x: 1660848000363
+            y: 2009.539794921875
+        }
+        7 [Object] (2): {
+            x: 1660848001363
+            y: 2023.8875732421875
+        }
+        8 [Object] (2): {
+            x: 1660848002365
+            y: 2031.5516357421875
+        }
+        9 [Object] (2): {
+            x: 1660848003365
+            y: 2044.983642578125
+        }
+        10 [Object] (2): {
+            x: 1660848004367
+            y: 1336.70751953125
+        }
+        11 [Object] (2): {
+            x: 1660848005368
+            y: 668.353759765625
+        }
+        12 [Object] (2): {
+            x: 1660848006370
+            y: 334.1768798828125
+        }
+        13 [Object] (2): {
+            x: 1660848007370
+            y: 167.08843994140625
+        }
+        14 [Object] (2): {
+            x: 1660848008372
+            y: 83.54421997070312
+        }
+        15 [Object] (2): {
+            x: 1660848009373
+            y: 41.77210998535156
+        }
+        16 [Object] (2): {
+            x: 1660848010374
+            y: 20.88605499267578
+        }
+        17 [Object] (2): {
+            x: 1660848011376
+            y: 10.44302749633789
+        }
+        18 [Object] (2): {
+            x: 1660848012376
+            y: 5.221513748168945
+        }
+    ]
+    active_flows [Array] (19): [
+        0 [Object] (2): {
+            x: 1660847994358
+            y: 1701
+        }
+        1 [Object] (2): {
+            x: 1660847995358
+            y: 3744
+        }
+        2 [Object] (2): {
+            x: 1660847996359
+            y: 5788
+        }
+        3 [Object] (2): {
+            x: 1660847997360
+            y: 7834
+        }
+        4 [Object] (2): {
+            x: 1660847998362
+            y: 9880
+        }
+        5 [Object] (2): {
+            x: 1660847999362
+            y: 10864
+        }
+        6 [Object] (2): {
+            x: 1660848000363
+            y: 10871
+        }
+        7 [Object] (2): {
+            x: 1660848001363
+            y: 10852
+        }
+        8 [Object] (2): {
+            x: 1660848002365
+            y: 10842
+        }
+        9 [Object] (2): {
+            x: 1660848003365
+            y: 10861
+        }
+        10 [Object] (2): {
+            x: 1660848004367
+            y: 0
+        }
+        11 [Object] (2): {
+            x: 1660848005368
+            y: 0
+        }
+        12 [Object] (2): {
+            x: 1660848006370
+            y: 0
+        }
+        13 [Object] (2): {
+            x: 1660848007370
+            y: 0
+        }
+        14 [Object] (2): {
+            x: 1660848008372
+            y: 0
+        }
+        15 [Object] (2): {
+            x: 1660848009373
+            y: 0
+        }
+        16 [Object] (2): {
+            x: 1660848010374
+            y: 0
+        }
+        17 [Object] (2): {
+            x: 1660848011376
+            y: 0
+        }
+        18 [Object] (2): {
+            x: 1660848012376
+            y: 0
+        }
+    ]
+}
