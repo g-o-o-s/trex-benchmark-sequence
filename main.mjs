@@ -8,12 +8,12 @@ import { default as clog } from 'ee-log';
 import { default as Hjson } from 'hjson';
 import { default as child_process } from 'child_process';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { default as prettyms } from 'pretty-ms';
+import { default as prettyMilliseconds } from 'pretty-ms';
 
-import { drawGraph as bpsDrawGraph } from './lib/graphs/bps.mjs';
-import { drawGraph as ppsDrawGraph } from './lib/graphs/pps.mjs';
-import { drawGraph as flowsDrawGraph } from './lib/graphs/flows.mjs';
-import { printSummaryStats as printSummaryStats } from './lib/humanreadable/summaryStats.mjs';
+import { drawGraph as bpsDrawGraph, bpsData } from './lib/graphs/bps.mjs';
+import { drawGraph as ppsDrawGraph, ppsData } from './lib/graphs/pps.mjs';
+import { drawGraph as flowsDrawGraph, flowsData} from './lib/graphs/flows.mjs';
+import { printSummaryStats, summaryStatsData } from './lib/humanreadable/summaryStats.mjs';
 
 const initTime = new Date();
 
@@ -50,33 +50,6 @@ for (let i = 0; i < config.testProfiles.length; i++) {
 
     // setup array for json output file
     const outputJson = [];
-
-    // object of arrays for final human readable stats
-    const summaryStatsData = {
-      tx_bps: [],
-      rx_bps: [],
-      tx_pps: [],
-      rx_pps: [],
-      rx_drop_bps: [],
-      active_flows: [],
-      tx_cps: [],
-    };
-
-    const bpsData = {
-      tx_bps: [],
-      rx_bps: [],
-      rx_drop_bps: [],
-    };
-
-    const ppsData = {
-      tx_pps: [],
-      rx_pps: [],
-    };
-
-    const flowsData = {
-      tx_cps: [],
-      active_flows: [],
-    };
 
     // note the use of spawnSync here - this could be improved with like, locking and a worker pool and stuff
     const argsArray = [
@@ -126,17 +99,17 @@ for (let i = 0; i < config.testProfiles.length; i++) {
 
           bpsData.tx_bps.push({
             x: timestamp,
-            y: input.stats.global.tx_bps
+            y: input.stats.global.tx_bps / 1000000
           });
 
           bpsData.rx_bps.push({
             x: timestamp,
-            y: input.stats.global.rx_bps
+            y: input.stats.global.rx_bps / 1000000
           });
 
           bpsData.rx_drop_bps.push({
             x: timestamp,
-            y: input.stats.global.rx_drop_bps
+            y: input.stats.global.rx_drop_bps / 1000000
           });
 
           ppsData.tx_pps.push({
@@ -182,13 +155,13 @@ for (let i = 0; i < config.testProfiles.length; i++) {
     console.log(`Expected run time: ${config.duration}s`);
     console.log(`Run start time: ${startTime.toUTCString()}`);
     console.log(`Run end time: ${finishTime.toUTCString()}`);
-    console.log(`Total run time: ${prettyms(finishTime.getTime() - startTime.getTime())}`);
+    console.log(`Total run time: ${prettyMilliseconds(finishTime.getTime() - startTime.getTime())}`);
 
     var diff = (expectedFinishTime.getTime() - finishTime.getTime());
     var sign = diff < 0 ? -1 : 1;
     console.log(
       sign === -1 ? "Over by" : "Under by",
-      prettyms(diff)
+      prettyMilliseconds(diff)
     );
 
     // build our dirs
@@ -223,65 +196,4 @@ for (let i = 0; i < config.testProfiles.length; i++) {
   }
 
   // GOTO 10
-}
-
-// stole these from various stackoverflow threads
-function arr_stddev(arr) {
-  // Creating the mean with Array.reduce
-  let mean = arr.reduce((acc, curr)=>{
-    return acc + curr;
-  }, 0) / arr.length;
-
-  // Assigning (value - mean) ^ 2 to every array item
-  arr = arr.map((k)=>{
-    return (k - mean) ** 2;
-  })
-
-  // Calculating the sum of updated array
- let sum = arr.reduce((acc, curr)=> acc + curr, 0);
-
- // Calculating the variance
- let variance = sum / arr.length;
-
- // Returning the Standered deviation
- return Math.sqrt(sum / arr.length);
-}
-
-function arr_mean(arr) {
-  const total = arr.reduce((acc, c) => acc + c, 0);
-  const mean = total / arr.length;
-  return mean;
-}
-
-// Clear outliers from our datasets - only used in human readable display
-function filterOutliers(someArray) {
-
-  // Copy the values, rather than operating on references to existing values
-  var values = someArray.concat();
-
-  // Then sort
-  values.sort( function(a, b) {
-          return a - b;
-       });
-
-  /* Then find a generous IQR. This is generous because if (values.length / 4)
-   * is not an int, then really you should average the two elements on either
-   * side to find q1.
-   */
-  var q1 = values[Math.floor((values.length / 4))];
-  // Likewise for q3.
-  var q3 = values[Math.ceil((values.length * (3 / 4)))];
-  var iqr = q3 - q1;
-
-  // Then find min and max values
-  var maxValue = q3 + iqr*1.5;
-  var minValue = q1 - iqr*1.5;
-
-  // Then filter anything beyond or beneath these values.
-  var filteredValues = values.filter(function(x) {
-      return (x <= maxValue) && (x >= minValue);
-  });
-
-  // Then return
-  return filteredValues;
 }

@@ -1,10 +1,10 @@
 {
   server: 'trex.straylight.goosga.ng',
-  dutName: 'l2-hw-lo',
+  dutName: 'r4s-owrt',
   runName: 'test02-full',
-  description: 'straight up hardware loopback. 6in patch cable between client/server ports'
+  description: 'r4s bidir NAT'
   sleep: 1.0,
-  duration: 600,
+  duration: 1200,
   latencyRate: 100,
   testProfiles: [
     {
