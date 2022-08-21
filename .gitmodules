@@ -1,3 +1,3 @@
-[submodule "pyastf-json-convertor"]
-	path = pyastf-json-convertor
-	url = https://github.com/velocipacktor/pyastf-json-convertor
+[submodule "trex-core"]
+	path = trex-core
+	url = https://github.com/cisco-system-traffic-generator/trex-core.git
