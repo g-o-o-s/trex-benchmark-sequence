@@ -1,0 +1,114 @@
+{
+  "buf_list": [
+      "R0VUIC8zMzg0IEhUVFAvMS4xDQpIb3N0OiAyMi4wLjAuMw0KQ29ubmVjdGlvbjogS2VlcC1BbGl2ZQ0KVXNlci1BZ2VudDogTW96aWxsYS80LjAgKGNvbXBhdGlibGU7IE1TSUUgNy4wOyBXaW5kb3dzIE5UIDUuMTsgU1YxOyAuTkVUIENMUiAxLjEuNDMyMjsgLk5FVCBDTFIgMi4wLjUwNzI3KQ0KQWNjZXB0OiAqLyoNCkFjY2VwdC1MYW5ndWFnZTogZW4tdXMNCkFjY2VwdC1FbmNvZGluZzogZ3ppcCwgZGVmbGF0ZSwgY29tcHJlc3MNCg0K",
+      "SFRUUC8xLjEgMjAwIE9LDQpTZXJ2ZXI6IE1pY3Jvc29mdC1JSVMvNi4wDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KQ29udGVudC1MZW5ndGg6IDMyMDAwDQoNCjxodG1sPjxwcmU+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKjwvcHJlPjwvaHRtbD4="
+  ],
+  "ip_gen_dist_list": [
+      {
+          "ip_start": "16.0.0.0",
+          "ip_end": "16.0.0.255",
+          "distribution": "seq",
+          "dir": "c",
+          "ip_offset": "1.0.0.0"
+      },
+      {
+          "ip_start": "48.0.0.0",
+          "ip_end": "48.0.255.255",
+          "distribution": "seq",
+          "dir": "s",
+          "ip_offset": "1.0.0.0"
+      }
+  ],
+  "program_list": [
+      {
+          "commands": [
+              {
+                  "name": "tx",
+                  "buf_index": 0
+              },
+              {
+                  "name": "rx",
+                  "min_bytes": 11420
+              }
+          ]
+      },
+      {
+          "commands": [
+              {
+                  "name": "rx",
+                  "min_bytes": 249
+              },
+              {
+                  "id": 0,
+                  "name": "set_var",
+                  "val": 10000
+              },
+              {
+                  "name": "tx",
+                  "buf_index": 1
+              },
+              {
+                  "id": 0,
+                  "offset": -1,
+                  "name": "jmp_nz"
+              },
+              {
+                  "name": "tx_mode",
+                  "flags": 0
+              },
+              {
+                  "name": "tx",
+                  "buf_index": 1
+              }
+          ]
+      }
+  ],
+  "c_glob_info": {
+      "tcp": {
+          "mss": 1460,
+          "initwnd": 2,
+          "no_delay": 0,
+          "no_delay_counter": 2920,
+          "rxbufsize": 32768,
+          "txbufsize": 32768
+      }
+  },
+  "s_glob_info": {
+      "tcp": {
+          "mss": 1460,
+          "initwnd": 2,
+          "no_delay": 0,
+          "no_delay_counter": 2920,
+          "rxbufsize": 32768,
+          "txbufsize": 32768
+      }
+  },
+  "templates": [
+      {
+          "client_template": {
+              "program_index": 0,
+              "ip_gen": {
+                  "dist_client": {
+                      "index": 0
+                  },
+                  "dist_server": {
+                      "index": 1
+                  }
+              },
+              "cluster": {},
+              "port": 80,
+              "cps": 100,
+              "limit": 1000
+          },
+          "server_template": {
+              "program_index": 1,
+              "assoc": [
+                  {
+                      "port": 80
+                  }
+              ]
+          }
+      }
+  ],
+  "tg_names": []
+}

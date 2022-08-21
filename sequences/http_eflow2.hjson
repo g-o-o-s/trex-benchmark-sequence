@@ -3,18 +3,18 @@
   dutName: 'someDUT',                                 // for display only 
   runName: 'someRUN',                                 // for display only
   description: 'example python profile' 
-  sampleInterval: 500,                                // duration to sleep between perf samples - in ms
+  sampleInterval: 250,                                // duration to sleep between perf samples - in ms
   duration: 60,                                       // target test duration - not a hard limit
   latencyRate: 0,                                     // latency packet rate
   warmup: 10,
   cooldown: 10,
   testProfiles: [                                     // array of profiles to run
     {
-      name: 'res',                                    // Profile identifier
+      name: 'http_eflow2',                            // Profile identifier
       type: 'astf',
       enabled: true,                                  // Is this profile enabled?
       mult: 1,                                        // multiplier/amplification factor
-      file: 'trex-core/scripts/astf/res.py',          // relative to 'pyastf-json-convertor' directory for python files - make sure you clone recursive
+      file: 'profiles/astf/http/http_eflow2.json',    // relative to 'pyastf-json-convertor' directory for python files - make sure you clone recursive
     }
   ]
 }

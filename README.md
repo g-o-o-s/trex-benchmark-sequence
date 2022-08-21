@@ -5,22 +5,26 @@
 This is a lil blob to make running repeatable benchmarks and generating consistent graphs easier with Cisco T-Rex.
 
 ## How use?
-
-- git clone --recursive https://github.com/g-o-o-s/trex-benchmark-sequence
+```
+- git clone --recursive https://github.com/velocipacktor/trex-benchmark-sequence.git
 - go get some coffee. trex-core is big
 - npm install (written with node 16.x)
-- `./t-rex-64 -i --astf -c 2` on your t-rex appliance/server
-- edit/create hjson configs under `sequences/`
-- `./rexbench run sequences/sfr.hjson -g`
+--> ./t-rex-64 -i --astf -c 2 on your t-rex appliance/server
+- ./rexbench run -g -r example_full_run sequences/full_run.hjson
+- go get another coffee
+- edit/create your own sequences / profiles
+- ./rexbench run -g sequences/my_sequence.hjson
 - ???
 - GRAPHS
+```
 
 ## But how do I setup a t-rex server?
-You'll need a system (vm probably works too, but lower perf of course) with at least 3 nics \
+You'll need a system (vm probably works too, but lower perf of course) with at least 3 nics and 4 cores \
 Put the 1st nic on your lab/mgmt/whatever network \
 Physically loopback the other 2
 
 copy-pasteables (as root):
+
 ```
 mkdir -p /opt/trex
 cd /opt/trex
@@ -31,11 +35,14 @@ cd v.299
   -> list interfaces
 ./dpdk_setup_ports.py -s
 
+  -> generate config file
 ./dpdk_setup_ports.py -i
   -> select MAC/Layer2 mode, select your two loopbacked nics
+  -> come back later when you (1: know what your hardware can do and 2: have a DUT) and select IP/Layer3 mode
 
 ./t-rex-64 -i --astf
 ```
+
 [see here for more info on install](https://trex-tgn.cisco.com/trex/doc/trex_manual.html#_download_and_installation)
 
 ## Help?
@@ -52,5 +59,4 @@ So. I want graphs. So here we are.
 ## Why nodejs?
 
 Because I suck at python and wanted to use a lang I'm comfy with. \
-This is basically lab equipment, not production code. \
-Feel free to rewrite this in python if you want.
+This is basically lab equipment, not production code.
