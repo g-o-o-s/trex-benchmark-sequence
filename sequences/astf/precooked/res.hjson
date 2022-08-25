@@ -1,0 +1,21 @@
+{
+  server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
+  dutName: 'someDUT',                                 // for display only 
+  runName: 'someRUN',                                 // for display only
+  description: 'example python profile' 
+  sampleInterval: 250,                                // duration to sleep between perf samples - in ms
+  duration: 60,                                       // target test duration - not a hard limit
+  latencyRate: 0,                                     // latency packet rate
+  warmup: 10,
+  cooldown: 10,
+  testProfiles: [                                     // array of profiles to run
+    {
+      name: 'res',                                    // Profile identifier
+      type: 'astf',
+      enabled: true,                                  // Is this profile enabled?
+      mult: 1000,                                        // multiplier/amplification factor
+      file: 'v2.99/astf/res.py',          // relative to 'pyastf-json-convertor' directory for python files - make sure you clone recursive
+      // tuneables: 'size=32,clients=6500,servers=6000,templates=100',
+    }
+  ]
+}

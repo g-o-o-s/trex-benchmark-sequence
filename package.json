@@ -2,10 +2,8 @@
   "name": "sequencer",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "main.mjs",
+  "bin": "main.mjs",
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -15,6 +13,26 @@
     "date-fns": "^2.29.1",
     "ee-log": "^3.0.9",
     "hjson": "^3.2.2",
-    "pretty-ms": "^8.0.0"
+    "jsrex": "github:velocipacktor/jsrex",
+    "node-pty": "^0.10.1",
+    "pretty-ms": "^8.0.0",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/eslint-parser": "^7.11.5",
+    "@babel/plugin-syntax-top-level-await": "^7.10.4",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-security": "^1.4.0",
+    "esprima": "^4.0.1",
+    "prettier": "^1.19.1",
+    "why-is-node-running": "^2.1.2"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/eslint --ignore-path .gitignore src/**/*.mjs"
   }
 }

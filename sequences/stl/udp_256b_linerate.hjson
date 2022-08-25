@@ -1,0 +1,21 @@
+{
+  server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
+  dutName: 'someDUT',                                 // for display only
+  runName: 'someRUN',                                 // for display only
+  description: 'example stateless profile'
+  warmup: 5,
+  cooldown: 5,
+  testProfiles: [                                     // array of profiles to run
+    {
+      name: 'udp_linerate_4_streams',                             // Profile identifier
+      type: 'stl',
+      enabled: true,                                  // Is this profile enabled?
+      mult: 1,                                      // Multiplier/amplification factor
+      file: 'v2.99/stl/udp_linerate_4_streams.py',          // Relative to repo root
+      sampleInterval: 250,                            // duration to sleep between perf samples - in ms
+      duration: 30,                                   // target test duration - not a hard limit
+      latencyRate: 0,                                 // latency packet rate
+      tuneables: 'size=214,load=100', // 214 payload + 42 of encap = 256b on wire
+    }
+  ]
+}
