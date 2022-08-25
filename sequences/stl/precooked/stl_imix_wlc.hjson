@@ -1,0 +1,21 @@
+{
+  server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
+  dutName: 'someDUT',                                 // for display only
+  runName: 'someRUN',                                 // for display only
+  description: 'example stateless profile'
+  warmup: 5,
+  cooldown: 5,
+  testProfiles: [                                     // array of profiles to run
+    {
+      name: 'stl_imix_wlc',                             // Profile identifier
+      type: 'stl',
+      enabled: true,                                  // Is this profile enabled?
+      mult: 260000,                                      // Multiplier/amplification factor
+      file: 'v2.99/stl/imix_wlc.py',          // Relative to repo root
+      sampleInterval: 250,                            // duration to sleep between perf samples - in ms
+      duration: 60,                                   // target test duration - not a hard limit
+      latencyRate: 0,                                 // latency packet rate
+      tuneables: 'src=16.0.0.1,dst=48.0.0.1,src_count=1024,dst_count=1024',
+    }
+  ]
+}

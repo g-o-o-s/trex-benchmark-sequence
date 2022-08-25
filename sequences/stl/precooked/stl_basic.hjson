@@ -1,0 +1,20 @@
+{
+  server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
+  dutName: 'someDUT',                                 // for display only
+  runName: 'someRUN',                                 // for display only
+  description: 'example stateless profile'
+  warmup: 5,
+  cooldown: 5,
+  testProfiles: [                                     // array of profiles to run
+    {
+      name: 'single_1500b_stream',                             // Profile identifier
+      type: 'stl',
+      enabled: true,                                  // Is this profile enabled?
+      mult: 1000,                                      // Multiplier/amplification factor
+      file: 'profiles/stl/basic/single_1500b_stream.mjs',          // Relative to repo root
+      sampleInterval: 500,                            // duration to sleep between perf samples - in ms
+      duration: 60,                                   // target test duration - not a hard limit
+      latencyRate: 0,                                 // latency packet rate
+    }
+  ]
+}

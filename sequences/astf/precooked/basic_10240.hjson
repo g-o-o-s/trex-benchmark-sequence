@@ -1,0 +1,20 @@
+{
+  server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
+  dutName: 'someDUT',                                 // for display only
+  runName: 'someRUN',                                 // for display only
+  description: 'example basic profile'
+  warmup: 5,
+  cooldown: 5,
+  testProfiles: [                                     // array of profiles to run
+    {
+      name: 'basic_10240',                             // Profile identifier
+      type: 'astf',
+      enabled: true,                                  // Is this profile enabled?
+      mult: 10,                                      // Multiplier/amplification factor
+      file: 'profiles/astf/basic/basic_10240.mjs',          // Relative to repo root
+      sampleInterval: 500,                            // duration to sleep between perf samples - in ms
+      duration: 60,                                   // target test duration - not a hard limit
+      latencyRate: 0,                                 // latency packet rate
+    }
+  ]
+}

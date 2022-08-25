@@ -1,0 +1,21 @@
+{
+  server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
+  dutName: 'someDUT',                                 // for display only 
+  runName: 'someRUN',                                 // for display only
+  description: 'example js profile'
+  sampleInterval: 250,                                // duration to sleep between perf samples - in ms
+  duration: 60,                                       // target test duration - not a hard limit
+  latencyRate: 1000,                                  // latency packet rate
+  warmup: 10,
+  cooldown: 10,
+  testProfiles: [                                     // array of profiles to run
+    {
+      name: 'ftp',                                    // Profile identifier
+      type: 'astf',
+      enabled: true,                                  // Is this profile enabled?
+      mult: 10000,                                        // Multiplier/amplification factor
+      file: 'trex-core/scripts/astf/ftp_multiple_flows_sim.py',                   // Relative to repo root
+      tuneables: 'fsize=10240,nflows=10000,tinc=1',
+    }
+  ]
+}

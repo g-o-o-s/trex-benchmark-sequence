@@ -1,0 +1,21 @@
+{
+  server: 'trex.straylight.goosga.ng',                // set to your trex astf server host/ip
+  dutName: 'someDUT',                                 // for display only
+  runName: 'someRUN',                                 // for display only
+  description: 'example stateless profile'
+  warmup: 5,
+  cooldown: 10,
+  testProfiles: [                                     // array of profiles to run
+    {
+      name: 'hlt_framesize_vm',                             // Profile identifier
+      type: 'stl',
+      enabled: true,                                  // Is this profile enabled?
+      mult: 1,                                      // Multiplier/amplification factor
+      file: 'v2.99/stl/hlt/hlt_framesize_vm.py',          // Relative to repo root
+      sampleInterval: 250,                            // duration to sleep between perf samples - in ms
+      duration: 60,                                   // target test duration - not a hard limit
+      latencyRate: 0,                                 // latency packet rate
+      tuneables: '',
+    }
+  ]
+}

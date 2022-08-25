@@ -14,6 +14,7 @@
     "ee-log": "^3.0.9",
     "hjson": "^3.2.2",
     "jsrex": "github:velocipacktor/jsrex",
+    "node-pty": "^0.10.1",
     "pretty-ms": "^8.0.0",
     "yargs": "^17.5.1"
   },

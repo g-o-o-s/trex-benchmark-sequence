@@ -105,3 +105,7 @@ dist
 
 # Graph / JSON output:
 output/
+
+# trex
+v2.99/
+v2.99.tar.gz
